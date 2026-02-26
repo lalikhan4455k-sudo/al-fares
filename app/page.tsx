@@ -16,8 +16,15 @@ export default function Home() {
     const fetchLatest = async () => {
       try {
         const res = await fetch('/api/blogs');
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
-        setLatestBlogs(data.slice(0, 3));
+        if (Array.isArray(data)) {
+          setLatestBlogs(data.slice(0, 3));
+        } else {
+          console.error('Expected array of blogs, got:', data);
+        }
       } catch (error) {
         console.error('Error fetching latest blogs:', error);
       }
@@ -28,14 +35,19 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-primary">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary">
         {/* Immersive Background */}
-        <div className="absolute inset-0 z-0">
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 10, ease: "easeOut" }}
+          className="absolute inset-0 z-0"
+        >
           <Image
             src="https://picsum.photos/1920/1080?random=10"
             alt="Law Office"
             fill
-            className="object-cover opacity-30 mix-blend-luminosity scale-105"
+            className="object-cover opacity-30 mix-blend-luminosity"
             referrerPolicy="no-referrer"
             priority
           />
@@ -44,21 +56,23 @@ export default function Home() {
           {/* Animated Floating Shapes */}
           <motion.div 
             animate={{ 
-              y: [0, -20, 0],
+              y: [0, -30, 0],
+              x: [0, 20, 0],
               rotate: [0, 5, 0]
             }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 right-1/4 w-72 h-72 bg-secondary/10 rounded-full blur-[100px]"
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]"
           ></motion.div>
           <motion.div 
             animate={{ 
-              y: [0, 30, 0],
+              y: [0, 40, 0],
+              x: [0, -30, 0],
               rotate: [0, -10, 0]
             }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px]"
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]"
           ></motion.div>
-        </div>
+        </motion.div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -152,7 +166,7 @@ export default function Home() {
             </div>
             
             <div className="lg:col-span-7">
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-6">
                 {[
                   { 
                     step: '01', 
@@ -175,8 +189,12 @@ export default function Home() {
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
-                    whileHover={{ x: 10 }}
-                    className="group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-xl flex items-start gap-6 transition-all duration-500 hover:bg-white/10 hover:border-secondary/30"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2, duration: 0.8 }}
+                    whileHover={{ x: 15, scale: 1.02 }}
+                    className="group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl flex items-start gap-6 transition-all duration-500 hover:bg-white/10 hover:border-secondary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]"
                   >
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 rounded-lg bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary font-bold text-xl group-hover:bg-secondary group-hover:text-primary transition-all duration-500">
@@ -549,26 +567,37 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Legal Advisory Notice Card */}
-            <div className="bg-white p-10 md:p-12 rounded-sm shadow-sm border border-primary/5 hover:shadow-md transition-shadow">
-              <h3 className="text-2xl md:text-3xl font-serif font-bold text-primary mb-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white p-10 md:p-12 rounded-xl shadow-sm border border-primary/5 hover:shadow-xl transition-all duration-500 group"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4 tracking-tight group-hover:text-secondary transition-colors">
                 Legal Advisory Notice
               </h3>
-              <div className="w-12 h-px bg-secondary mb-6"></div>
-              <p className="text-primary/70 leading-relaxed font-sans text-lg">
+              <div className="w-12 h-px bg-secondary mb-6 group-hover:w-20 transition-all duration-500"></div>
+              <p className="text-primary/70 leading-relaxed text-lg font-normal">
                 AL-FARES provides professional legal consultancy and advisory services. We focus on providing strategic legal guidance rather than courtroom litigation services. Legal services are provided in accordance with applicable laws and professional regulations.
               </p>
-            </div>
+            </motion.div>
 
             {/* Licensed & Regulated Card */}
-            <div className="bg-white p-10 md:p-12 rounded-sm shadow-sm border border-primary/5 hover:shadow-md transition-shadow">
-              <h3 className="text-2xl md:text-3xl font-serif font-bold text-primary mb-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white p-10 md:p-12 rounded-xl shadow-sm border border-primary/5 hover:shadow-xl transition-all duration-500 group"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4 tracking-tight group-hover:text-secondary transition-colors">
                 Licensed & Regulated
               </h3>
-              <div className="w-12 h-px bg-secondary mb-6"></div>
-              <p className="text-primary/70 leading-relaxed font-sans text-lg">
+              <div className="w-12 h-px bg-secondary mb-6 group-hover:w-20 transition-all duration-500"></div>
+              <p className="text-primary/70 leading-relaxed text-lg font-normal">
                 Fully licensed legal consultant authorized to provide legal advisory services in the Kingdom of Saudi Arabia and the United Arab Emirates. All services are delivered in compliance with local legal and professional regulatory authorities.
               </p>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -576,19 +605,32 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-24 bg-secondary relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://picsum.photos/1920/1080?random=3')] opacity-10 mix-blend-multiply object-cover"></div>
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0"
+        >
+          <Image src="https://picsum.photos/1920/1080?random=3" alt="CTA Background" fill className="opacity-10 mix-blend-multiply object-cover" />
+        </motion.div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">Ready to Discuss Your Case?</h2>
-          <p className="text-primary/80 text-xl mb-10 max-w-2xl mx-auto">
-            Schedule a confidential consultation today to explore your legal options and secure your rights.
-          </p>
-          <a
-            href="/booking"
-            className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-10 py-5 rounded-sm font-bold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            Schedule Consultation Now
-            <ArrowRight className="w-5 h-5" />
-          </a>
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 tracking-tight">Ready to Discuss Your Case?</h2>
+            <p className="text-primary/80 text-xl mb-10 max-w-2xl mx-auto font-normal">
+              Schedule a confidential consultation today to explore your legal options and secure your rights.
+            </p>
+            <Link
+              href="/booking"
+              className="inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-white px-10 py-5 rounded-sm font-bold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95"
+            >
+              Schedule Consultation Now
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>

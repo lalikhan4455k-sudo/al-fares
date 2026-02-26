@@ -14,19 +14,29 @@ const getStripe = () => {
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = req.headers.get('stripe-signature')!;
+  const signature = req.headers.get('stripe-signature');
+  const isTest = req.headers.get('x-test-webhook') === 'true';
   const stripe = getStripe();
 
   let event: Stripe.Event;
 
-  try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
-  } catch (err: any) {
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+  if (process.env.NODE_ENV === 'development' && isTest) {
+    // Local testing bypass
+    event = JSON.parse(body);
+    console.log('Local webhook test triggered');
+  } else {
+    if (!signature) {
+      return NextResponse.json({ error: 'Missing stripe-signature' }, { status: 400 });
+    }
+    try {
+      event = stripe.webhooks.constructEvent(
+        body,
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET!
+      );
+    } catch (err: any) {
+      return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+    }
   }
 
   if (event.type === 'checkout.session.completed') {

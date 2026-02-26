@@ -13,22 +13,7 @@ type I18nContextType = {
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Language>('EN');
-
-  useEffect(() => {
-    const saved = localStorage.getItem('lang') as Language;
-    if (saved && (saved === 'EN' || saved === 'AR')) {
-      const timer = setTimeout(() => setLangState(saved), 0);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const setLang = (newLang: Language) => {
-    setLangState(newLang);
-    localStorage.setItem('lang', newLang);
-    document.documentElement.dir = newLang === 'AR' ? 'rtl' : 'ltr';
-    document.documentElement.lang = newLang.toLowerCase();
-  };
+  const lang: Language = 'EN';
 
   const t = (path: string) => {
     const keys = path.split('.');
@@ -40,7 +25,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     return current;
   };
 
-  const isRTL = lang === 'AR';
+  const isRTL = false;
+  const setLang = () => {};
 
   return (
     <I18nContext.Provider value={{ lang, setLang, t, isRTL }}>

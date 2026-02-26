@@ -54,21 +54,39 @@ export default function ServicesPage() {
   return (
     <div className="bg-light text-primary min-h-screen">
       {/* Header */}
-      <section className="bg-primary py-24 relative overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary z-10"></div>
-        <div className="absolute inset-0 bg-[url('https://picsum.photos/1920/600?random=6')] opacity-10 object-cover mix-blend-overlay"></div>
+      <section className="bg-primary py-32 relative overflow-hidden flex items-center justify-center">
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 10 }}
+          className="absolute inset-0 z-0"
+        >
+          <Image src="https://picsum.photos/1920/600?random=6" alt="Background" fill className="opacity-10 object-cover mix-blend-overlay" />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-primary z-10"></div>
         
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center animate-in fade-in duration-1000">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md tracking-tight">
-            Practice Areas
-          </h1>
-          <div className="w-16 h-[2px] bg-secondary mx-auto mb-6"></div>
-          <h2 className="text-xl md:text-2xl text-secondary mb-6 drop-shadow-sm font-medium">
-            Expert Legal Services
-          </h2>
-          <p className="text-base md:text-lg text-light/80 leading-relaxed max-w-2xl mx-auto">
-            Strategic legal advisory solutions designed to protect and strengthen your personal and business interests across Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman, and Jordan.
-          </p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-md tracking-tight">
+              Practice Areas
+            </h1>
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: 64 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="h-[2px] bg-secondary mx-auto mb-8"
+            ></motion.div>
+            <h2 className="text-xl md:text-2xl text-secondary mb-8 drop-shadow-sm font-medium uppercase tracking-[0.2em]">
+              Expert Legal Services
+            </h2>
+            <p className="text-lg md:text-xl text-light/80 leading-relaxed max-w-2xl mx-auto font-normal">
+              Strategic legal advisory solutions designed to protect and strengthen your personal and business interests across the GCC and beyond.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -79,31 +97,39 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <motion.div 
                 key={service.id} 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white p-12 border border-primary/5 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-sm group relative overflow-hidden"
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                whileHover={{ y: -10 }}
+                className="bg-white p-12 border border-primary/5 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-2xl group relative overflow-hidden"
               >
-                <div className="absolute top-0 left-0 w-full h-1.5 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                <div className="absolute -right-10 -top-10 w-32 h-32 bg-secondary/5 rounded-full group-hover:bg-secondary/10 transition-colors duration-500"></div>
+                <div className="absolute top-0 left-0 w-full h-2 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700"></div>
+                <div className="absolute -right-10 -top-10 w-40 h-40 bg-secondary/5 rounded-full group-hover:bg-secondary/10 transition-all duration-700 group-hover:scale-150"></div>
                 
-                <service.icon className="w-16 h-16 text-secondary mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500" strokeWidth={1} />
-                
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300 leading-tight">{service.title}</h3>
-                
-                <p className="text-primary/60 leading-relaxed mb-8 font-normal text-base">
-                  {service.description}
-                </p>
-                
-                <Link
-                  href={`/booking?service=${service.id}`}
-                  className="inline-flex items-center gap-3 text-[10px] font-bold text-primary uppercase tracking-[0.2em] hover:text-secondary transition-all duration-300 group/link relative"
-                >
-                  Book Consultation
-                  <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform duration-300" />
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover/link:w-full"></span>
-                </Link>
+                <div className="relative z-10">
+                  <motion.div
+                    whileHover={{ rotate: 15, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <service.icon className="w-16 h-16 text-secondary mb-10 transition-colors duration-500 group-hover:text-primary" strokeWidth={1} />
+                  </motion.div>
+                  
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300 leading-tight tracking-tight">{service.title}</h3>
+                  
+                  <p className="text-primary/60 leading-relaxed mb-8 font-normal text-base">
+                    {service.description}
+                  </p>
+                  
+                  <Link
+                    href={`/booking?service=${service.id}`}
+                    className="inline-flex items-center gap-3 text-[10px] font-bold text-primary uppercase tracking-[0.2em] hover:text-secondary transition-all duration-300 group/link relative"
+                  >
+                    Book Consultation
+                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform duration-300" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover/link:w-full"></span>
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </div>

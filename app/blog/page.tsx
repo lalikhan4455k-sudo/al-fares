@@ -19,8 +19,15 @@ export default function BlogPage() {
     const fetchBlogs = async () => {
       try {
         const res = await fetch('/api/blogs');
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
-        setBlogs(data);
+        if (Array.isArray(data)) {
+          setBlogs(data);
+        } else {
+          console.error('Expected array of blogs, got:', data);
+        }
       } catch (error) {
         console.error('Error fetching blogs:', error);
       } finally {
@@ -59,12 +66,32 @@ export default function BlogPage() {
   return (
     <div className="bg-light text-primary min-h-screen">
       {/* Header */}
-      <section className="bg-primary py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://picsum.photos/1920/600?random=5')] opacity-10 object-cover mix-blend-overlay"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-xs font-bold text-secondary uppercase tracking-widest mb-4">{t('nav.blog')}</h1>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">News & Updates</h2>
-          <div className="w-16 h-[2px] bg-secondary mx-auto"></div>
+      <section className="bg-primary py-32 relative overflow-hidden flex items-center justify-center">
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 10 }}
+          className="absolute inset-0 z-0"
+        >
+          <Image src="https://picsum.photos/1920/600?random=5" alt="Background" fill className="opacity-10 object-cover mix-blend-overlay" />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-primary z-10"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h1 className="text-xs font-bold text-secondary uppercase tracking-[0.4em] mb-6">{t('nav.blog')}</h1>
+            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">News & Updates</h2>
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: 64 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="h-[2px] bg-secondary mx-auto"
+            ></motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -82,38 +109,39 @@ export default function BlogPage() {
                 <div className="text-center py-20 bg-white border border-primary/5 rounded-sm">
                   <p className="text-primary/40">No insights published yet.</p>
                 </div>
-              ) : blogs.map((post) => (
+              ) : blogs.map((post, i) => (
                 <motion.article 
                   key={post.id} 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.8 }}
                   className="group"
                 >
-                  <div className="relative h-[350px] mb-8 overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-700">
+                  <div className="relative h-[400px] mb-10 overflow-hidden rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-700">
                     <Image 
                       src={post.image} 
                       alt={post.title}
                       fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"></div>
-                    <div className="absolute top-6 left-6 bg-secondary text-primary px-4 py-1.5 text-[8px] font-bold uppercase tracking-widest rounded-sm shadow-xl">
+                    <div className="absolute inset-0 bg-primary/30 group-hover:bg-primary/10 transition-colors duration-500"></div>
+                    <div className="absolute top-8 left-8 bg-secondary text-primary px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-2xl">
                       {post.category}
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-primary/40 mb-4">
-                    <span className="flex items-center gap-2 group-hover:text-secondary transition-colors"><Calendar className="w-3.5 h-3.5 text-secondary" /> {post.date}</span>
-                    <span className="flex items-center gap-2 group-hover:text-secondary transition-colors"><User className="w-3.5 h-3.5 text-secondary" /> {post.author}</span>
+                  <div className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-widest text-primary/40 mb-6">
+                    <span className="flex items-center gap-2.5 group-hover:text-secondary transition-colors"><Calendar className="w-4 h-4 text-secondary" /> {post.date}</span>
+                    <span className="flex items-center gap-2.5 group-hover:text-secondary transition-colors"><User className="w-4 h-4 text-secondary" /> {post.author}</span>
                   </div>
                   
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4 group-hover:text-secondary transition-colors leading-tight tracking-tight">
+                  <h3 className="text-3xl md:text-5xl font-bold mb-6 group-hover:text-secondary transition-colors leading-tight tracking-tight">
                     <Link href={`/blog/${post.id}`}>{post.title}</Link>
                   </h3>
                   
-                  <p className="text-primary/60 text-lg mb-8 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-primary/60 text-xl mb-10 leading-relaxed max-w-3xl font-normal">
                     {post.excerpt}
                   </p>
                   

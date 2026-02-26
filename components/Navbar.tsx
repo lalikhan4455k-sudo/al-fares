@@ -8,37 +8,7 @@ import { useI18n } from '@/lib/i18n/context';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { lang, setLang, t, isRTL } = useI18n();
-
-  const [isTranslating, setIsTranslating] = useState(false);
-
-  const toggleLang = () => {
-    setIsTranslating(true);
-    const newLang = lang === 'EN' ? 'AR' : 'EN';
-    setLang(newLang);
-    
-    // Google Translate Cookie Integration
-    const translateVal = newLang === 'AR' ? '/en/ar' : '/en/en';
-    
-    // Set cookie for the current domain and subdomains
-    const domain = window.location.hostname;
-    document.cookie = `googtrans=${translateVal}; path=/; domain=${domain}`;
-    document.cookie = `googtrans=${translateVal}; path=/`;
-    
-    // Force Google Translate to re-evaluate
-    if (typeof window !== 'undefined') {
-      const googleTranslateCombo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-      if (googleTranslateCombo) {
-        googleTranslateCombo.value = newLang === 'AR' ? 'ar' : 'en';
-        googleTranslateCombo.dispatchEvent(new Event('change'));
-      }
-      
-      // Short delay to show the loading state before reload
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    }
-  };
+  const { t } = useI18n();
 
   const navLinks = [
     { name: t('nav.home'), href: '/' },
@@ -52,28 +22,6 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 w-full z-50 bg-primary/95 backdrop-blur-sm border-b border-secondary/20">
-      {/* Translation Overlay */}
-      <AnimatePresence>
-        {isTranslating && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-primary flex flex-col items-center justify-center"
-          >
-            <motion.div 
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-20 h-20 border-t-2 border-r-2 border-secondary rounded-full mb-8"
-            ></motion.div>
-            <h2 className="text-secondary text-xl font-bold tracking-[0.2em] uppercase animate-pulse">
-              {lang === 'EN' ? 'Translating to Arabic...' : 'Translating to English...'}
-            </h2>
-            <p className="text-light/40 mt-4 font-light tracking-widest uppercase text-[10px]">Al-Fares Legal Excellence</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
@@ -103,13 +51,6 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="flex items-center gap-4 ml-4 pl-4 border-l border-secondary/30">
-              <button 
-                onClick={toggleLang}
-                className="flex items-center gap-1 text-light/80 hover:text-secondary transition-all duration-300 text-sm font-bold hover:scale-110"
-              >
-                <Globe className="w-4 h-4" />
-                <span>{lang}</span>
-              </button>
               <Link
                 href="/booking"
                 className="bg-secondary hover:bg-white text-primary px-5 py-2 rounded-sm font-semibold text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] active:scale-95"
@@ -149,18 +90,11 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <div className="mt-4 pt-4 border-t border-secondary/20 px-3 flex items-center justify-between">
-                <button 
-                  onClick={toggleLang}
-                  className="flex items-center gap-2 text-light hover:text-secondary font-bold"
-                >
-                  <Globe className="w-5 h-5" />
-                  <span>{lang === 'EN' ? 'Arabic' : 'English'}</span>
-                </button>
+              <div className="mt-4 pt-4 border-t border-secondary/20 px-3 flex items-center justify-center">
                 <Link
                   href="/booking"
                   onClick={() => setIsOpen(false)}
-                  className="bg-secondary text-primary px-4 py-2 rounded-sm font-semibold text-sm uppercase tracking-wider"
+                  className="bg-secondary text-primary px-4 py-2 rounded-sm font-semibold text-sm uppercase tracking-wider w-full text-center"
                 >
                   {t('nav.bookNow')}
                 </Link>

@@ -131,6 +131,7 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
 }
 
 export async function sendNewSubscriberNotification(email: string) {
+  // Notify Owner
   await transporter.sendMail({
     from: `"System" <${process.env.EMAIL_USER}>`,
     to: process.env.OWNER_EMAIL,
@@ -150,10 +151,32 @@ export async function sendNewSubscriberNotification(email: string) {
       </div>
     `,
   });
+
+  // Acknowledge Client
+  await transporter.sendMail({
+    from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: 'Welcome to Al-Fares Law Firm Newsletter',
+    html: `
+      ${EMAIL_STYLE}
+      <div class="container">
+        <div class="header">
+          <h1>Welcome</h1>
+        </div>
+        <div class="content">
+          <h2>Thank you for subscribing!</h2>
+          <p>You have successfully joined the Al-Fares Law Firm newsletter. You will now receive our latest legal insights and firm updates directly in your inbox.</p>
+          <p>We look forward to sharing our expertise with you.</p>
+        </div>
+      </div>
+    `,
+  });
 }
 
 export async function sendContactFormNotification(data: any) {
   const { name, email, subject, message, phone } = data;
+  
+  // Notify Owner
   await transporter.sendMail({
     from: `"System" <${process.env.EMAIL_USER}>`,
     to: process.env.OWNER_EMAIL,
@@ -176,6 +199,31 @@ export async function sendContactFormNotification(data: any) {
           </div>
           <p><strong>Message:</strong></p>
           <p style="white-space: pre-wrap;">${message}</p>
+        </div>
+      </div>
+    `,
+  });
+
+  // Acknowledge Client
+  await transporter.sendMail({
+    from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: 'We Received Your Message - Al-Fares Law Firm',
+    html: `
+      ${EMAIL_STYLE}
+      <div class="container">
+        <div class="header">
+          <h1>Message Received</h1>
+        </div>
+        <div class="content">
+          <h2>Dear ${name},</h2>
+          <p>Thank you for reaching out to Al-Fares Law Firm. We have received your message regarding "<strong>${subject}</strong>" and our team will review it promptly.</p>
+          <p>One of our legal consultants will get back to you within 24-48 business hours.</p>
+          <div class="details">
+            <p><strong>Your Message:</strong></p>
+            <p style="font-style: italic;">${message}</p>
+          </div>
+          <p>Thank you for your patience.</p>
         </div>
       </div>
     `,
