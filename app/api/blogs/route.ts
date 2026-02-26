@@ -15,7 +15,7 @@ export async function GET() {
           content: 'Corporate law in Saudi Arabia has undergone significant transformations recently...',
           author: 'Ahmad Khan',
           category: 'Corporate Law',
-          image: 'https://picsum.photos/800/600?random=101',
+          image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
           date: 'February 15, 2024'
         },
         {
@@ -24,7 +24,7 @@ export async function GET() {
           content: 'Investing in real estate is a major decision...',
           author: 'Legal Expert',
           category: 'Real Estate',
-          image: 'https://picsum.photos/800/600?random=102',
+          image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=800&auto=format&fit=crop',
           date: 'February 10, 2024'
         },
         {
@@ -33,7 +33,7 @@ export async function GET() {
           content: 'The Middle East is becoming a global hub for fintech...',
           author: 'Ahmad Khan',
           category: 'Fintech',
-          image: 'https://picsum.photos/800/600?random=103',
+          image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=800&auto=format&fit=crop',
           date: 'February 5, 2024'
         },
         {
@@ -42,7 +42,7 @@ export async function GET() {
           content: 'For startups, intellectual property is often their most valuable asset...',
           author: 'IP Specialist',
           category: 'Intellectual Property',
-          image: 'https://picsum.photos/800/600?random=104',
+          image: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?q=80&w=800&auto=format&fit=crop',
           date: 'January 28, 2024'
         },
         {
@@ -51,7 +51,7 @@ export async function GET() {
           content: 'Understanding labor law is essential for both employers and employees...',
           author: 'HR Legal Advisor',
           category: 'Employment Law',
-          image: 'https://picsum.photos/800/600?random=105',
+          image: 'https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=800&auto=format&fit=crop',
           date: 'January 20, 2024'
         },
         {
@@ -60,7 +60,7 @@ export async function GET() {
           content: 'International arbitration offers a neutral and efficient way to settle disputes...',
           author: 'Senior Consultant',
           category: 'Dispute Resolution',
-          image: 'https://picsum.photos/800/600?random=106',
+          image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop',
           date: 'January 15, 2024'
         },
         {
@@ -69,7 +69,7 @@ export async function GET() {
           content: 'Cybersecurity is no longer just an IT issue; it is a legal one...',
           author: 'Tech Lawyer',
           category: 'Cybersecurity',
-          image: 'https://picsum.photos/800/600?random=107',
+          image: 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?q=80&w=800&auto=format&fit=crop',
           date: 'January 10, 2024'
         },
         {
@@ -78,7 +78,7 @@ export async function GET() {
           content: 'The GCC is moving away from a tax-free model...',
           author: 'Tax Consultant',
           category: 'Taxation',
-          image: 'https://picsum.photos/800/600?random=108',
+          image: 'https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=800&auto=format&fit=crop',
           date: 'January 5, 2024'
         },
         {
@@ -87,7 +87,7 @@ export async function GET() {
           content: 'Maritime law governs a vast array of activities...',
           author: 'Maritime Expert',
           category: 'Maritime Law',
-          image: 'https://picsum.photos/800/600?random=109',
+          image: 'https://images.unsplash.com/photo-1505663912202-ac22d4cb3707?q=80&w=800&auto=format&fit=crop',
           date: 'December 28, 2023'
         },
         {
@@ -96,7 +96,7 @@ export async function GET() {
           content: 'Family law matters are deeply personal...',
           author: 'Family Law Attorney',
           category: 'Family Law',
-          image: 'https://picsum.photos/800/600?random=110',
+          image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
           date: 'December 20, 2023'
         },
         {
@@ -105,7 +105,7 @@ export async function GET() {
           content: 'Sustainability is now a legal requirement in many sectors...',
           author: 'Ahmad Khan',
           category: 'Environmental Law',
-          image: 'https://picsum.photos/800/600?random=111',
+          image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=800&auto=format&fit=crop',
           date: 'December 15, 2023'
         },
         {
@@ -114,7 +114,7 @@ export async function GET() {
           content: 'AI is changing the way we do business...',
           author: 'AI Policy Expert',
           category: 'Technology Law',
-          image: 'https://picsum.photos/800/600?random=112',
+          image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=800&auto=format&fit=crop',
           date: 'December 10, 2023'
         }
       ];

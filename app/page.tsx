@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Scale, Briefcase, FileText, Users, Building, Gavel, Star, CheckCircle2, Shield, Globe, Clock, MessageCircle, MapPin, Phone, Mail, Send } from 'lucide-react';
+import { ArrowRight, Scale, Briefcase, FileText, Users, Building, Gavel, Star, CheckCircle2, Shield, Globe, Clock, MessageCircle, MapPin, Phone, Mail, Send, Award, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import Link from 'next/link';
@@ -133,7 +133,7 @@ export default function Home() {
                 className="relative z-10 aspect-[4/5] rounded-sm overflow-hidden border border-secondary/20 shadow-2xl shadow-black/50"
               >
                 <Image
-                  src="https://picsum.photos/800/1000?random=11"
+                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop"
                   alt="Legal Excellence"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
@@ -293,6 +293,38 @@ export default function Home() {
                 </Link>
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section - Visual Data */}
+      <section className="py-24 bg-primary text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+            {[
+              { label: 'Cases Resolved', value: '1,200+', icon: Scale },
+              { label: 'Corporate Clients', value: '450+', icon: Building },
+              { label: 'Success Rate', value: '98%', icon: ShieldCheck },
+              { label: 'Years Experience', value: '15+', icon: Award },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="text-center group"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary group-hover:text-primary transition-all duration-500 border border-secondary/20">
+                  <stat.icon className="w-8 h-8 text-secondary group-hover:text-primary transition-colors" />
+                </div>
+                <h4 className="text-4xl md:text-5xl font-bold mb-2 tracking-tight">{stat.value}</h4>
+                <p className="text-light/60 text-xs font-bold uppercase tracking-widest">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -610,7 +642,7 @@ export default function Home() {
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute inset-0"
         >
-          <Image src="https://picsum.photos/1920/1080?random=3" alt="CTA Background" fill className="opacity-10 mix-blend-multiply object-cover" />
+          <Image src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" alt="CTA Background" fill className="opacity-10 mix-blend-multiply object-cover" />
         </motion.div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
