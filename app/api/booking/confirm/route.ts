@@ -35,13 +35,13 @@ export async function POST(req: Request) {
             INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, stripe_session_id)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid', ?)
           `).run(
-            metadata.service,
-            metadata.type,
-            metadata.date,
-            metadata.time,
-            metadata.name,
-            metadata.email,
-            metadata.phone,
+            metadata.service || 'N/A',
+            metadata.type || 'online',
+            metadata.date || 'N/A',
+            metadata.time || 'N/A',
+            metadata.name || 'N/A',
+            metadata.email || 'N/A',
+            metadata.phone || 'N/A',
             metadata.notes || '',
             session.id
           );

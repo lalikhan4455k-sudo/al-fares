@@ -34,93 +34,111 @@ const EMAIL_STYLE = `
 `;
 
 export async function sendBookingConfirmation(booking: any) {
-  const { name, email, service, date, time, type } = booking;
+  const name = booking.name || 'Valued Client';
+  const email = booking.email || '';
+  const service = booking.service || 'Legal Consultation';
+  const date = booking.date || 'To be scheduled';
+  const time = booking.time || 'To be scheduled';
+  const type = booking.type || 'online';
 
-  // Email to Client
-  await transporter.sendMail({
-    from: `"Ahmad Khan | Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: 'Consultation Confirmed - Al-Fares Law Firm',
-    html: `
-      <!DOCTYPE html>
-      <html>
-      <head>
-      ${EMAIL_STYLE}
-      </head>
-      <body>
-      <div class="wrapper">
-      <div class="container">
-        <div class="header">
-          <h1>Al-Fares Law Firm</h1>
-          <p>Excellence in Legal Counsel</p>
-        </div>
-        <div class="content">
-          <h2>Consultation Confirmed</h2>
-          <p>Dear <strong>${name}</strong>,</p>
-          <p>Your legal consultation has been successfully scheduled and the payment has been received. Our legal consultant will be ready to discuss your case at the appointed time.</p>
-          <div class="details">
-            <ul>
-              <li><strong>Service:</strong> ${service}</li>
-              <li><strong>Date:</strong> ${date}</li>
-              <li><strong>Time:</strong> ${time}</li>
-              <li><strong>Type:</strong> ${type}</li>
-              <li><strong>Status:</strong> <span style="color: #10b981; font-weight: bold;">Paid (100.00 SAR)</span></li>
-            </ul>
-          </div>
-          <p>If you need to reschedule or have any immediate questions, please contact our office directly.</p>
-          <p>Thank you for choosing Al-Fares Law Firm.</p>
-        </div>
-        <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Ahmad Khan | Al-Fares Law Firm. All rights reserved.</p>
-          <p>Riyadh | Dubai | Abu Dhabi | Doha | Kuwait | Muscat</p>
-        </div>
-      </div>
-      </div>
-      </body>
-      </html>
-    `,
-  });
+  // Send emails in parallel but wrap each in try-catch to ensure one failure doesn't block the other
+  const emailPromises = [];
 
-  // Email to Owner
-  await transporter.sendMail({
-    from: `"System" <${process.env.EMAIL_USER}>`,
-    to: process.env.OWNER_EMAIL,
-    subject: 'NEW BOOKING: Consultation Scheduled',
-    html: `
-      <!DOCTYPE html>
-      <html>
-      <head>
-      ${EMAIL_STYLE}
-      </head>
-      <body>
-      <div class="wrapper">
-      <div class="container">
-        <div class="header">
-          <h1>New Booking Received</h1>
-          <p>Action Required</p>
-        </div>
-        <div class="content">
-          <h2>Client Details</h2>
-          <div class="details">
-            <ul>
-              <li><strong>Client Name:</strong> ${name}</li>
-              <li><strong>Email:</strong> ${email}</li>
-              <li><strong>Phone:</strong> ${booking.phone || 'N/A'}</li>
-              <li><strong>Service:</strong> ${service}</li>
-              <li><strong>Date:</strong> ${date}</li>
-              <li><strong>Time:</strong> ${time}</li>
-              <li><strong>Type:</strong> ${type}</li>
-            </ul>
+  // 1. Email to Client
+  if (email) {
+    emailPromises.push(
+      transporter.sendMail({
+        from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: 'Consultation Confirmed - Al-Fares Law Firm',
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+          ${EMAIL_STYLE}
+          </head>
+          <body>
+          <div class="wrapper">
+          <div class="container">
+            <div class="header">
+              <h1>Al-Fares Law Firm</h1>
+              <p>Excellence in Legal Counsel</p>
+            </div>
+            <div class="content">
+              <h2>Consultation Confirmed</h2>
+              <p>Dear <strong>${name}</strong>,</p>
+              <p>Your legal consultation has been successfully scheduled and the payment has been received. Our legal consultant will be ready to discuss your case at the appointed time.</p>
+              <div class="details">
+                <ul>
+                  <li><strong>Service:</strong> ${service}</li>
+                  <li><strong>Date:</strong> ${date}</li>
+                  <li><strong>Time:</strong> ${time}</li>
+                  <li><strong>Type:</strong> ${type}</li>
+                  <li><strong>Status:</strong> <span style="color: #10b981; font-weight: bold;">Paid (100.00 SAR)</span></li>
+                </ul>
+              </div>
+              <p>If you need to reschedule or have any immediate questions, please contact our office directly.</p>
+              <p>Thank you for choosing Al-Fares Law Firm.</p>
+            </div>
+            <div class="footer">
+              <p>&copy; ${new Date().getFullYear()} Al-Fares Law Firm. All rights reserved.</p>
+              <p>Riyadh | Dubai | Abu Dhabi | Doha | Kuwait | Muscat</p>
+            </div>
           </div>
-          <p><strong>Client Notes:</strong></p>
-          <div class="message-box">${booking.notes || 'No notes provided'}</div>
-        </div>
-      </div>
-      </div>
-      </body>
-      </html>
-    `,
-  });
+          </div>
+          </body>
+          </html>
+        `,
+      }).catch(err => console.error('Error sending client booking email:', err))
+    );
+  }
+
+  // 2. Email to Owner
+  if (process.env.OWNER_EMAIL) {
+    emailPromises.push(
+      transporter.sendMail({
+        from: `"System | Al-Fares" <${process.env.EMAIL_USER}>`,
+        to: process.env.OWNER_EMAIL,
+        subject: `NEW BOOKING: ${name} - ${service}`,
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+          ${EMAIL_STYLE}
+          </head>
+          <body>
+          <div class="wrapper">
+          <div class="container">
+            <div class="header">
+              <h1>New Booking Received</h1>
+              <p>Action Required</p>
+            </div>
+            <div class="content">
+              <h2>Client Details</h2>
+              <div class="details">
+                <ul>
+                  <li><strong>Client Name:</strong> ${name}</li>
+                  <li><strong>Email:</strong> ${email}</li>
+                  <li><strong>Phone:</strong> ${booking.phone || 'N/A'}</li>
+                  <li><strong>Service:</strong> ${service}</li>
+                  <li><strong>Date:</strong> ${date}</li>
+                  <li><strong>Time:</strong> ${time}</li>
+                  <li><strong>Type:</strong> ${type}</li>
+                </ul>
+              </div>
+              <p><strong>Client Notes:</strong></p>
+              <div class="message-box">${booking.notes || 'No notes provided'}</div>
+            </div>
+          </div>
+          </div>
+          </body>
+          </html>
+        `,
+      }).catch(err => console.error('Error sending owner booking email:', err))
+    );
+  }
+
+  await Promise.all(emailPromises);
 }
 
 export async function sendBlogUpdate(subscribers: string[], blog: any) {
