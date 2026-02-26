@@ -27,13 +27,13 @@ export async function POST(req: Request) {
 
       if (metadata) {
         // Check if already processed
-        const existing = db.prepare('SELECT id FROM bookings WHERE stripe_session_id = ?').get(session.id);
+        const existing = db.prepare('SELECT id, email_sent FROM bookings WHERE stripe_session_id = ?').get(session.id) as { id: number, email_sent: number } | undefined;
         
         if (!existing) {
           // Save to DB
-          db.prepare(`
-            INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, stripe_session_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid', ?)
+          const result = db.prepare(`
+            INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, stripe_session_id, email_sent)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid', ?, 0)
           `).run(
             metadata.service || 'N/A',
             metadata.type || 'online',
@@ -48,9 +48,22 @@ export async function POST(req: Request) {
 
           // Send Emails
           try {
-            await sendBookingConfirmation(metadata);
+            const sent = await sendBookingConfirmation(metadata);
+            if (sent) {
+              db.prepare('UPDATE bookings SET email_sent = 1 WHERE id = ?').run(result.lastInsertRowid);
+            }
           } catch (emailError) {
-            console.error('Email sending failed:', emailError);
+            console.error('Email sending failed in confirm route:', emailError);
+          }
+        } else if (existing.email_sent === 0) {
+          // Record exists but email failed previously, try again
+          try {
+            const sent = await sendBookingConfirmation(metadata);
+            if (sent) {
+              db.prepare('UPDATE bookings SET email_sent = 1 WHERE id = ?').run(existing.id);
+            }
+          } catch (emailError) {
+            console.error('Email retry failed in confirm route:', emailError);
           }
         }
       }

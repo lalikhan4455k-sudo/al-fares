@@ -29,7 +29,8 @@ db.exec(`
     phone TEXT NOT NULL,
     notes TEXT,
     payment_status TEXT DEFAULT 'pending',
-    stripe_session_id TEXT
+    stripe_session_id TEXT,
+    email_sent INTEGER DEFAULT 0
   );
 
   CREATE TABLE IF NOT EXISTS subscribers (

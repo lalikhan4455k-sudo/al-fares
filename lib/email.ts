@@ -8,6 +8,19 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  // Add pool for better performance and connection reuse
+  pool: true,
+  maxConnections: 5,
+  maxMessages: 100,
+});
+
+// Verify connection configuration
+transporter.verify(function (error, success) {
+  if (error) {
+    console.error('SMTP Connection Error:', error);
+  } else {
+    console.log('SMTP Server is ready to take our messages');
+  }
 });
 
 const EMAIL_STYLE = `
@@ -40,6 +53,12 @@ export async function sendBookingConfirmation(booking: any) {
   const date = booking.date || 'To be scheduled';
   const time = booking.time || 'To be scheduled';
   const type = booking.type || 'online';
+  const fromEmail = process.env.EMAIL_USER;
+
+  if (!fromEmail) {
+    console.error('EMAIL_USER is not defined. Cannot send emails.');
+    return false;
+  }
 
   // Send emails in parallel but wrap each in try-catch to ensure one failure doesn't block the other
   const emailPromises = [];
@@ -48,7 +67,7 @@ export async function sendBookingConfirmation(booking: any) {
   if (email) {
     emailPromises.push(
       transporter.sendMail({
-        from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+        from: `"Al-Fares Law Firm" <${fromEmail}>`,
         to: email,
         subject: 'Consultation Confirmed - Al-Fares Law Firm',
         html: `
@@ -89,7 +108,10 @@ export async function sendBookingConfirmation(booking: any) {
           </body>
           </html>
         `,
-      }).catch(err => console.error('Error sending client booking email:', err))
+      }).catch(err => {
+        console.error('Error sending client booking email:', err);
+        throw err; // Re-throw to catch in Promise.all if needed
+      })
     );
   }
 
@@ -97,7 +119,7 @@ export async function sendBookingConfirmation(booking: any) {
   if (process.env.OWNER_EMAIL) {
     emailPromises.push(
       transporter.sendMail({
-        from: `"System | Al-Fares" <${process.env.EMAIL_USER}>`,
+        from: `"System | Al-Fares" <${fromEmail}>`,
         to: process.env.OWNER_EMAIL,
         subject: `NEW BOOKING: ${name} - ${service}`,
         html: `
@@ -134,12 +156,22 @@ export async function sendBookingConfirmation(booking: any) {
           </body>
           </html>
         `,
-      }).catch(err => console.error('Error sending owner booking email:', err))
+      }).catch(err => {
+        console.error('Error sending owner booking email:', err);
+        throw err;
+      })
     );
   }
 
-  await Promise.all(emailPromises);
+  try {
+    await Promise.all(emailPromises);
+    return true;
+  } catch (err) {
+    console.error('One or more emails failed to send:', err);
+    return false;
+  }
 }
+
 
 export async function sendBlogUpdate(subscribers: string[], blog: any) {
   const { title, excerpt, id } = blog;
