@@ -71,9 +71,9 @@ export default function BookingPage() {
       </section>
 
       <div className="py-24">
-
-        {/* Preparation Section */}
-        <div className="bg-primary text-white p-8 md:p-10 rounded-sm mb-12 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Preparation Section */}
+          <div className="bg-primary text-white p-8 md:p-10 rounded-sm mb-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
           <div className="relative z-10">
             <h3 className="text-xl font-serif font-bold text-secondary mb-4">{t('booking.prepareTitle')}</h3>
@@ -323,11 +323,11 @@ export default function BookingPage() {
                 {t('booking.successDesc')}
               </p>
               <div className="bg-light p-6 rounded-sm border border-primary/10 mb-8 text-left max-w-sm mx-auto">
-                <p className="text-sm text-primary/60 mb-2 uppercase tracking-wider font-bold">Confirmation Details</p>
-                <p className="text-primary font-medium mb-1">Date: <span className="font-normal">{formData.date}</span></p>
-                <p className="text-primary font-medium mb-1">Time: <span className="font-normal">{formData.time}</span></p>
-                <p className="text-primary font-medium mb-1">Type: <span className="font-normal capitalize">{formData.type}</span></p>
-                <p className="text-primary font-medium">Email sent to: <span className="font-normal">{formData.email}</span></p>
+                <p className="text-sm text-primary/60 mb-2 uppercase tracking-wider font-bold">{t('booking.confDetails')}</p>
+                <p className="text-primary font-medium mb-1">{t('booking.confDate')}: <span className="font-normal">{formData.date}</span></p>
+                <p className="text-primary font-medium mb-1">{t('booking.confTime')}: <span className="font-normal">{formData.time}</span></p>
+                <p className="text-primary font-medium mb-1">{t('booking.confType')}: <span className="font-normal capitalize">{formData.type}</span></p>
+                <p className="text-primary font-medium">{t('booking.confEmail')}: <span className="font-normal">{formData.email}</span></p>
               </div>
               <button
                 onClick={() => router.push('/')}
@@ -338,6 +338,7 @@ export default function BookingPage() {
             </div>
           )}
 
+        </div>
         </div>
       </div>
     </div>

@@ -13,9 +13,24 @@ function BookingSuccessContent() {
 
   useEffect(() => {
     if (sessionId) {
-      // In a real app, we might verify the session here
-      const timer = setTimeout(() => setLoading(false), 0);
-      return () => clearTimeout(timer);
+      const confirmBooking = async () => {
+        try {
+          await fetch('/api/booking/confirm', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ session_id: sessionId }),
+          });
+        } catch (error) {
+          console.error('Error confirming booking:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      confirmBooking();
+    } else {
+      setLoading(false);
     }
   }, [sessionId]);
 

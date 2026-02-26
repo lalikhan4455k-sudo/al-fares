@@ -12,18 +12,24 @@ const transporter = nodemailer.createTransport({
 
 const EMAIL_STYLE = `
   <style>
-    body { font-family: 'Georgia', serif; line-height: 1.6; color: #1a1a1a; margin: 0; padding: 0; }
-    .container { max-width: 600px; margin: 20px auto; border: 1px solid #e5e5e5; }
-    .header { background-color: #0c1c35; color: #d4af37; padding: 40px; text-align: center; }
-    .content { padding: 40px; background-color: #ffffff; }
-    .footer { background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 12px; color: #666; }
-    .button { background-color: #d4af37; color: #0c1c35; padding: 12px 24px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
-    .details { background-color: #f5f5f5; padding: 20px; border-left: 4px solid #d4af37; margin: 20px 0; }
-    h1 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; }
-    h2 { color: #0c1c35; font-size: 20px; margin-top: 0; }
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 10px; }
-    strong { color: #0c1c35; }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #1a1a1a; margin: 0; padding: 0; background-color: #f4f4f5; }
+    .wrapper { padding: 40px 20px; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .header { background: linear-gradient(135deg, #0c1c35 0%, #1a365d 100%); color: #ffffff; padding: 50px 40px; text-align: center; position: relative; }
+    .header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: #d4af37; }
+    .header h1 { font-family: 'Playfair Display', serif; margin: 0; font-size: 32px; font-weight: 700; letter-spacing: 1px; color: #ffffff; }
+    .header p { margin: 10px 0 0 0; color: #d4af37; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+    .content { padding: 40px; }
+    .content h2 { font-family: 'Playfair Display', serif; color: #0c1c35; font-size: 24px; margin-top: 0; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }
+    .footer { background-color: #fafafa; padding: 30px 40px; text-align: center; font-size: 12px; color: #888; border-top: 1px solid #eee; }
+    .button { background-color: #d4af37; color: #0c1c35 !important; padding: 14px 28px; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 25px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; }
+    .details { background-color: #f8fafc; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; margin: 25px 0; }
+    .details ul { list-style: none; padding: 0; margin: 0; }
+    .details li { margin-bottom: 12px; font-size: 15px; display: flex; align-items: flex-start; }
+    .details li:last-child { margin-bottom: 0; }
+    .details strong { color: #0c1c35; font-weight: 600; min-width: 140px; display: inline-block; }
+    .message-box { background-color: #fff; padding: 20px; border-left: 4px solid #d4af37; font-style: italic; color: #4a5568; margin-top: 15px; }
   </style>
 `;
 
