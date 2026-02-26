@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Terms & Conditions | Al-Fares Law Firm',
-  description: 'Terms and Conditions for Al-Fares Law Firm website.',
+  title: 'Terms & Conditions | Al-Ahmad Law Firm',
+  description: 'Terms and Conditions for Al-Ahmad Law Firm website.',
 };
 
 export default function TermsPage() {
@@ -25,7 +25,7 @@ export default function TermsPage() {
 
             <h2 className="text-3xl font-bold text-primary mb-6">1. Agreement to Terms</h2>
             <p>
-              These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and Al-Fares Law Firm (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), led by Ahmad Khan, concerning your access to and use of the website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
+              These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and Al-Ahmad Law Firm (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), led by Ahmad Khan, concerning your access to and use of the website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
             </p>
 
             <h2 className="text-3xl font-bold text-primary mb-6 mt-12">2. Intellectual Property Rights</h2>
@@ -57,7 +57,7 @@ export default function TermsPage() {
               In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at:
             </p>
             <div className="bg-light p-8 rounded-xl border border-primary/5 mt-8">
-              <p className="font-bold text-primary mb-2">Al-Fares Law Firm</p>
+              <p className="font-bold text-primary mb-2">Al-Ahmad Law Firm</p>
               <p className="text-primary/70">King Fahd Road, Olaya District</p>
               <p className="text-primary/70">Riyadh 12211, Saudi Arabia</p>
               <p className="text-secondary mt-2 font-medium">mr.advocate.law.firm@gmail.com</p>

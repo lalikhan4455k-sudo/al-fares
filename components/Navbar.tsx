@@ -33,7 +33,7 @@ export default function Navbar() {
                 <div className="absolute -inset-1 bg-secondary/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-secondary tracking-tight uppercase group-hover:text-white transition-colors leading-none">Al-Fares</span>
+                <span className="text-xl font-bold text-secondary tracking-tight uppercase group-hover:text-white transition-colors leading-none">Al-Ahmad</span>
                 <span className="text-[9px] text-light/50 tracking-[0.4em] uppercase group-hover:text-secondary transition-colors mt-1">Law Firm</span>
               </div>
             </Link>

@@ -394,7 +394,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-xl">
               <h2 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Our Advantage</h2>
-              <h3 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Why Choose <span className="text-secondary">Al-Fares</span></h3>
+              <h3 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Why Choose <span className="text-secondary">Al-Ahmad</span></h3>
             </div>
             <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed">
               We combine deep regional expertise with international standards to deliver exceptional legal outcomes.
@@ -610,7 +610,7 @@ export default function Home() {
               </h3>
               <div className="w-12 h-px bg-secondary mb-6 group-hover:w-20 transition-all duration-500"></div>
               <p className="text-primary/70 leading-relaxed text-lg font-normal">
-                AL-FARES provides professional legal consultancy and advisory services. We focus on providing strategic legal guidance rather than courtroom litigation services. Legal services are provided in accordance with applicable laws and professional regulations.
+                AL-AHMAD provides professional legal consultancy and advisory services. We focus on providing strategic legal guidance rather than courtroom litigation services. Legal services are provided in accordance with applicable laws and professional regulations.
               </p>
             </motion.div>
 

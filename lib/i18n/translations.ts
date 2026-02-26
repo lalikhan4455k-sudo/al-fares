@@ -36,7 +36,7 @@ export const translations = {
     about: {
       title: 'About the Firm',
       subtitle: 'Expert Legal Representation',
-      description: 'Led by Ahmad Khan, Al-Fares Law Firm has been a beacon of legal excellence across the GCC and Middle East for over 15 years.',
+      description: 'Led by Ahmad Khan, Al-Ahmad Law Firm has been a beacon of legal excellence across the GCC and Middle East for over 15 years.',
       years: 'Years of Experience',
       readMore: 'Read Full Biography',
     },
@@ -143,7 +143,7 @@ export const translations = {
     about: {
       title: 'عن المكتب',
       subtitle: 'تمثيل قانوني خبير',
-      description: 'بقيادة أحمد خان، كان مكتب الفارس للمحاماة منارة للتميز القانوني في جميع أنحاء دول مجلس التعاون الخليجي والشرق الأوسط لأكثر من 15 عاماً.',
+      description: 'بقيادة أحمد خان، كان مكتب الأحمد للمحاماة منارة للتميز القانوني في جميع أنحاء دول مجلس التعاون الخليجي والشرق الأوسط لأكثر من 15 عاماً.',
       years: 'سنوات من الخبرة',
       readMore: 'اقرأ السيرة الذاتية الكاملة',
     },

@@ -48,7 +48,7 @@ export default function Footer() {
                 AL
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-xl font-bold text-secondary tracking-wider uppercase">Al-Fares</span>
+                <span className="font-serif text-xl font-bold text-secondary tracking-wider uppercase">Al-Ahmad</span>
                 <span className="text-xs text-light/70 tracking-widest uppercase">Law Firm</span>
               </div>
             </div>
@@ -139,7 +139,7 @@ export default function Footer() {
 
         <div className="border-t border-secondary/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-light/60">
-            &copy; {new Date().getFullYear()} Al-Fares Law Firm. {t('footer.rights')}
+            &copy; {new Date().getFullYear()} Al-Ahmad Law Firm. {t('footer.rights')}
           </p>
           <div className="flex space-x-6 text-sm text-light/60">
             <Link href="/privacy" className="hover:text-secondary transition-colors">{t('footer.privacy')}</Link>

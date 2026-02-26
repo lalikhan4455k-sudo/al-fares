@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Privacy Policy | Al-Fares Law Firm',
-  description: 'Privacy Policy for Al-Fares Law Firm website.',
+  title: 'Privacy Policy | Al-Ahmad Law Firm',
+  description: 'Privacy Policy for Al-Ahmad Law Firm website.',
 };
 
 export default function PrivacyPage() {
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
 
             <h2 className="text-3xl font-bold text-primary mb-6">1. Introduction</h2>
             <p>
-              Al-Fares Law Firm (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;), led by Ahmad Khan, is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our legal consultation services.
+              Al-Ahmad Law Firm (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;), led by Ahmad Khan, is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our legal consultation services.
             </p>
 
             <h2 className="text-3xl font-bold text-primary mb-6 mt-12">2. Information We Collect</h2>
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
               If you have questions or comments about this notice, you may email us at <a href="mailto:mr.advocate.law.firm@gmail.com" className="text-secondary hover:underline">mr.advocate.law.firm@gmail.com</a> or by post to:
             </p>
             <div className="bg-light p-8 rounded-xl border border-primary/5 mt-8">
-              <p className="font-bold text-primary mb-2">Al-Fares Law Firm</p>
+              <p className="font-bold text-primary mb-2">Al-Ahmad Law Firm</p>
               <p className="text-primary/70">King Fahd Road, Olaya District</p>
               <p className="text-primary/70">Riyadh 12211, Saudi Arabia</p>
             </div>
