@@ -13,8 +13,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Al-Fares Law Firm | Legal Consultation Middle East',
-  description: 'Professional legal consultation services in Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman, and Jordan. Expert representation in family, corporate, and civil law.',
+  title: 'Ahmad Khan | Al-Fares Law Firm | Legal Consultation Middle East',
+  description: 'Professional legal consultation services by Ahmad Khan in Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman, and Jordan. Expert representation in family, corporate, and civil law.',
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

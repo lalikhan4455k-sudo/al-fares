@@ -44,7 +44,7 @@ export default function Home() {
           className="absolute inset-0 z-0"
         >
           <Image
-            src="https://picsum.photos/1920/1080?random=10"
+            src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=1920&auto=format&fit=crop"
             alt="Law Office"
             fill
             className="object-cover opacity-30 mix-blend-luminosity"
@@ -228,8 +228,8 @@ export default function Home() {
                 className="relative z-10 aspect-[5/6] rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)]"
               >
                 <Image
-                  src="https://picsum.photos/1000/1200?random=2"
-                  alt="Lawyer Portrait"
+                  src="https://images.unsplash.com/photo-1556157382-97dee2dcb70c?q=80&w=1000&auto=format&fit=crop"
+                  alt="Ahmad Khan - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                   referrerPolicy="no-referrer"

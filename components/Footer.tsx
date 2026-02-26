@@ -142,8 +142,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Al-Fares Law Firm. {t('footer.rights')}
           </p>
           <div className="flex space-x-6 text-sm text-light/60">
-            <Link href="/privacy" className="hover:text-secondary transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-secondary transition-colors">Terms & Conditions</Link>
+            <Link href="/privacy" className="hover:text-secondary transition-colors">{t('footer.privacy')}</Link>
+            <Link href="/terms" className="hover:text-secondary transition-colors">{t('footer.terms')}</Link>
           </div>
         </div>
       </div>

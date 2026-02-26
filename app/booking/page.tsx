@@ -53,14 +53,24 @@ export default function BookingPage() {
   };
 
   return (
-    <div className="bg-light text-primary min-h-screen py-24">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-light text-primary min-h-screen">
+      {/* Header */}
+      <section className="bg-primary py-24 relative overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary z-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1920&auto=format&fit=crop')] opacity-10 object-cover mix-blend-overlay"></div>
         
-        <div className="text-center mb-12">
-          <h1 className="text-sm font-bold text-secondary uppercase tracking-widest mb-4">{t('booking.title')}</h1>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">{t('booking.subtitle')}</h2>
-          <div className="w-24 h-1 bg-secondary mx-auto"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center animate-in fade-in duration-1000">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md tracking-tight">
+            {t('booking.title')}
+          </h1>
+          <div className="w-16 h-[2px] bg-secondary mx-auto mb-6"></div>
+          <h2 className="text-xl md:text-2xl text-secondary mb-6 drop-shadow-sm font-medium">
+            {t('booking.subtitle')}
+          </h2>
         </div>
+      </section>
+
+      <div className="py-24">
 
         {/* Preparation Section */}
         <div className="bg-primary text-white p-8 md:p-10 rounded-sm mb-12 relative overflow-hidden">

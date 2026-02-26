@@ -32,7 +32,7 @@ export async function sendBookingConfirmation(booking: any) {
 
   // Email to Client
   await transporter.sendMail({
-    from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+    from: `"Ahmad Khan | Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'Consultation Confirmed - Al-Fares Law Firm',
     html: `
@@ -59,7 +59,7 @@ export async function sendBookingConfirmation(booking: any) {
           <p>Thank you for choosing Al-Fares Law Firm.</p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Al-Fares Law Firm. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Ahmad Khan | Al-Fares Law Firm. All rights reserved.</p>
           <p>Riyadh | Dubai | Abu Dhabi | Doha | Kuwait | Muscat</p>
         </div>
       </div>
@@ -104,7 +104,7 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
   for (const email of subscribers) {
     try {
       await transporter.sendMail({
-        from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+        from: `"Ahmad Khan | Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: `Legal Insight: ${title}`,
         html: `
@@ -154,7 +154,7 @@ export async function sendNewSubscriberNotification(email: string) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+    from: `"Ahmad Khan | Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'Welcome to Al-Fares Law Firm Newsletter',
     html: `
@@ -206,7 +206,7 @@ export async function sendContactFormNotification(data: any) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
+    from: `"Ahmad Khan | Al-Fares Law Firm" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'We Received Your Message - Al-Fares Law Firm',
     html: `
