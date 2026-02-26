@@ -44,27 +44,32 @@ export async function POST(req: Request) {
     const metadata = session.metadata;
 
     if (metadata) {
-      // Save to DB
-      db.prepare(`
-        INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, stripe_session_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid', ?)
-      `).run(
-        metadata.service,
-        metadata.type,
-        metadata.date,
-        metadata.time,
-        metadata.name,
-        metadata.email,
-        metadata.phone,
-        metadata.notes || '',
-        session.id
-      );
+      // Check if already processed
+      const existing = db.prepare('SELECT id FROM bookings WHERE stripe_session_id = ?').get(session.id);
+      
+      if (!existing) {
+        // Save to DB
+        db.prepare(`
+          INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, stripe_session_id)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid', ?)
+        `).run(
+          metadata.service,
+          metadata.type,
+          metadata.date,
+          metadata.time,
+          metadata.name,
+          metadata.email,
+          metadata.phone,
+          metadata.notes || '',
+          session.id
+        );
 
-      // Send Emails
-      try {
-        await sendBookingConfirmation(metadata);
-      } catch (emailError) {
-        console.error('Email sending failed:', emailError);
+        // Send Emails
+        try {
+          await sendBookingConfirmation(metadata);
+        } catch (emailError) {
+          console.error('Email sending failed:', emailError);
+        }
       }
     }
   }

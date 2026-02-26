@@ -42,23 +42,29 @@ export async function sendBookingConfirmation(booking: any) {
     to: email,
     subject: 'Consultation Confirmed - Al-Fares Law Firm',
     html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
       ${EMAIL_STYLE}
+      </head>
+      <body>
+      <div class="wrapper">
       <div class="container">
         <div class="header">
           <h1>Al-Fares Law Firm</h1>
           <p>Excellence in Legal Counsel</p>
         </div>
         <div class="content">
-          <h2>Consultation Confirmed & Paid</h2>
-          <p>Dear ${name},</p>
+          <h2>Consultation Confirmed</h2>
+          <p>Dear <strong>${name}</strong>,</p>
           <p>Your legal consultation has been successfully scheduled and the payment has been received. Our legal consultant will be ready to discuss your case at the appointed time.</p>
           <div class="details">
             <ul>
               <li><strong>Service:</strong> ${service}</li>
               <li><strong>Date:</strong> ${date}</li>
               <li><strong>Time:</strong> ${time}</li>
-              <li><strong>Consultation Type:</strong> ${type}</li>
-              <li><strong>Payment Status:</strong> Paid (100.00 SAR)</li>
+              <li><strong>Type:</strong> ${type}</li>
+              <li><strong>Status:</strong> <span style="color: #10b981; font-weight: bold;">Paid (100.00 SAR)</span></li>
             </ul>
           </div>
           <p>If you need to reschedule or have any immediate questions, please contact our office directly.</p>
@@ -69,6 +75,9 @@ export async function sendBookingConfirmation(booking: any) {
           <p>Riyadh | Dubai | Abu Dhabi | Doha | Kuwait | Muscat</p>
         </div>
       </div>
+      </div>
+      </body>
+      </html>
     `,
   });
 
@@ -78,10 +87,17 @@ export async function sendBookingConfirmation(booking: any) {
     to: process.env.OWNER_EMAIL,
     subject: 'NEW BOOKING: Consultation Scheduled',
     html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
       ${EMAIL_STYLE}
+      </head>
+      <body>
+      <div class="wrapper">
       <div class="container">
         <div class="header">
           <h1>New Booking Received</h1>
+          <p>Action Required</p>
         </div>
         <div class="content">
           <h2>Client Details</h2>
@@ -94,11 +110,15 @@ export async function sendBookingConfirmation(booking: any) {
               <li><strong>Date:</strong> ${date}</li>
               <li><strong>Time:</strong> ${time}</li>
               <li><strong>Type:</strong> ${type}</li>
-              <li><strong>Notes:</strong> ${booking.notes || 'No notes provided'}</li>
             </ul>
           </div>
+          <p><strong>Client Notes:</strong></p>
+          <div class="message-box">${booking.notes || 'No notes provided'}</div>
         </div>
       </div>
+      </div>
+      </body>
+      </html>
     `,
   });
 }
@@ -114,7 +134,13 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
         to: email,
         subject: `Legal Insight: ${title}`,
         html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
           ${EMAIL_STYLE}
+          </head>
+          <body>
+          <div class="wrapper">
           <div class="container">
             <div class="header">
               <h1>Legal Insights</h1>
@@ -128,6 +154,9 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
               <p style="font-size: 11px; color: #999;">You are receiving this because you subscribed to Al-Fares Law Firm updates.</p>
             </div>
           </div>
+          </div>
+          </body>
+          </html>
         `,
       });
     } catch (error) {
@@ -143,7 +172,13 @@ export async function sendNewSubscriberNotification(email: string) {
     to: process.env.OWNER_EMAIL,
     subject: 'NEW SUBSCRIBER: Newsletter Signup',
     html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
       ${EMAIL_STYLE}
+      </head>
+      <body>
+      <div class="wrapper">
       <div class="container">
         <div class="header">
           <h1>New Newsletter Subscriber</h1>
@@ -155,6 +190,9 @@ export async function sendNewSubscriberNotification(email: string) {
           </div>
         </div>
       </div>
+      </div>
+      </body>
+      </html>
     `,
   });
 
@@ -164,7 +202,13 @@ export async function sendNewSubscriberNotification(email: string) {
     to: email,
     subject: 'Welcome to Al-Fares Law Firm Newsletter',
     html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
       ${EMAIL_STYLE}
+      </head>
+      <body>
+      <div class="wrapper">
       <div class="container">
         <div class="header">
           <h1>Welcome</h1>
@@ -175,6 +219,9 @@ export async function sendNewSubscriberNotification(email: string) {
           <p>We look forward to sharing our expertise with you.</p>
         </div>
       </div>
+      </div>
+      </body>
+      </html>
     `,
   });
 }
@@ -188,7 +235,13 @@ export async function sendContactFormNotification(data: any) {
     to: process.env.OWNER_EMAIL,
     subject: `CONTACT FORM: ${subject}`,
     html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
       ${EMAIL_STYLE}
+      </head>
+      <body>
+      <div class="wrapper">
       <div class="container">
         <div class="header">
           <h1>Contact Form Submission</h1>
@@ -204,9 +257,12 @@ export async function sendContactFormNotification(data: any) {
             </ul>
           </div>
           <p><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap;">${message}</p>
+          <div class="message-box">${message}</div>
         </div>
       </div>
+      </div>
+      </body>
+      </html>
     `,
   });
 
@@ -216,7 +272,13 @@ export async function sendContactFormNotification(data: any) {
     to: email,
     subject: 'We Received Your Message - Al-Fares Law Firm',
     html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
       ${EMAIL_STYLE}
+      </head>
+      <body>
+      <div class="wrapper">
       <div class="container">
         <div class="header">
           <h1>Message Received</h1>
@@ -227,11 +289,14 @@ export async function sendContactFormNotification(data: any) {
           <p>One of our legal consultants will get back to you within 24-48 business hours.</p>
           <div class="details">
             <p><strong>Your Message:</strong></p>
-            <p style="font-style: italic;">${message}</p>
+            <div class="message-box">${message}</div>
           </div>
           <p>Thank you for your patience.</p>
         </div>
       </div>
+      </div>
+      </body>
+      </html>
     `,
   });
 }
