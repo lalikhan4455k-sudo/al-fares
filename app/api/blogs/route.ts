@@ -13,7 +13,7 @@ export async function GET() {
           title: 'Understanding Corporate Law in Saudi Arabia',
           excerpt: 'A comprehensive guide to the latest changes in corporate regulations and compliance for businesses operating in the Kingdom.',
           content: 'Corporate law in Saudi Arabia has undergone significant transformations recently...',
-          author: 'Ahmad Khan',
+          author: 'Advocate Ejaz',
           category: 'Corporate Law',
           image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
           date: 'February 15, 2024'
@@ -31,7 +31,7 @@ export async function GET() {
           title: 'The Future of Fintech Regulation in the Middle East',
           excerpt: 'How regulatory sandboxes and new licensing frameworks are shaping the growth of financial technology.',
           content: 'The Middle East is becoming a global hub for fintech...',
-          author: 'Ahmad Khan',
+          author: 'Advocate Ejaz',
           category: 'Fintech',
           image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=800&auto=format&fit=crop',
           date: 'February 5, 2024'
@@ -103,7 +103,7 @@ export async function GET() {
           title: 'Environmental Regulations and Sustainability',
           excerpt: 'How new green initiatives and laws are impacting industrial operations and corporate responsibility.',
           content: 'Sustainability is now a legal requirement in many sectors...',
-          author: 'Ahmad Khan',
+          author: 'Advocate Ejaz',
           category: 'Environmental Law',
           image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=800&auto=format&fit=crop',
           date: 'December 15, 2023'

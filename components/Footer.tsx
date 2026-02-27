@@ -45,11 +45,11 @@ export default function Footer() {
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold text-xl font-serif">
-                AL
+                GL
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-xl font-bold text-secondary tracking-wider uppercase">Al-Ahmad</span>
-                <span className="text-xs text-light/70 tracking-widest uppercase">Law Firm</span>
+                <span className="font-serif text-xl font-bold text-secondary tracking-wider uppercase">Gulf Legal</span>
+                <span className="text-xs text-light/70 tracking-widest uppercase">Consultant</span>
               </div>
             </div>
             <p className="text-sm leading-relaxed">
@@ -141,7 +141,7 @@ export default function Footer() {
 
         <div className="border-t border-secondary/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-light/60" suppressHydrationWarning>
-            &copy; {new Date().getFullYear()} Al-Ahmad Law Firm. {t('footer.rights')}
+            &copy; {new Date().getFullYear()} Gulf Legal Consultant. {t('footer.rights')}
           </p>
           <div className="flex space-x-6 text-sm text-light/60">
             <Link href="/privacy" className="hover:text-secondary transition-colors">{t('footer.privacy')}</Link>

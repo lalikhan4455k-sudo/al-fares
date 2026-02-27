@@ -12,7 +12,7 @@ export default function NewBlogPage() {
     title: '',
     excerpt: '',
     content: '',
-    author: 'Al-Ahmad Legal Team',
+    author: 'Gulf Legal Consultant Team',
     category: 'Legal Updates',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
   });

@@ -54,9 +54,9 @@ export async function sendBookingConfirmation(booking: any) {
   if (email) {
     emailPromises.push(
       transporter.sendMail({
-        from: `"Al-Ahmad Law Firm" <${fromEmail}>`,
+        from: `"Gulf Legal Consultant" <${fromEmail}>`,
         to: email,
-        subject: 'Consultation Confirmed - Al-Ahmad Law Firm',
+        subject: 'Consultation Confirmed - Gulf Legal Consultant',
         html: `
           <!DOCTYPE html>
           <html>
@@ -67,7 +67,7 @@ export async function sendBookingConfirmation(booking: any) {
           <div class="wrapper">
           <div class="container">
             <div class="header">
-              <h1>Al-Ahmad Law Firm</h1>
+              <h1>Gulf Legal Consultant</h1>
               <p>Excellence in Legal Counsel</p>
             </div>
             <div class="content">
@@ -84,10 +84,10 @@ export async function sendBookingConfirmation(booking: any) {
                 </ul>
               </div>
               <p>If you need to reschedule or have any immediate questions, please contact our office directly.</p>
-              <p>Thank you for choosing Al-Ahmad Law Firm.</p>
+              <p>Thank you for choosing Gulf Legal Consultant.</p>
             </div>
             <div class="footer">
-              <p>&copy; ${new Date().getFullYear()} Al-Ahmad Law Firm. All rights reserved.</p>
+              <p>&copy; ${new Date().getFullYear()} Gulf Legal Consultant. All rights reserved.</p>
               <p>Riyadh | Dubai | Abu Dhabi | Doha | Kuwait | Muscat</p>
             </div>
           </div>
@@ -106,7 +106,7 @@ export async function sendBookingConfirmation(booking: any) {
   if (process.env.OWNER_EMAIL) {
     emailPromises.push(
       transporter.sendMail({
-        from: `"System | Al-Ahmad" <${fromEmail}>`,
+        from: `"System | Gulf Legal Consultant" <${fromEmail}>`,
         to: process.env.OWNER_EMAIL,
         subject: `NEW BOOKING: ${name} - ${service}`,
         html: `
@@ -167,7 +167,7 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
   for (const email of subscribers) {
     try {
       await transporter.sendMail({
-        from: `"Ahmad Khan | Al-Ahmad Law Firm" <${process.env.EMAIL_USER}>`,
+        from: `"Advocate Ejaz | Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: `Legal Insight: ${title}`,
         html: `
@@ -181,14 +181,14 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
           <div class="container">
             <div class="header">
               <h1>Legal Insights</h1>
-              <p>Al-Ahmad Law Firm</p>
+              <p>Gulf Legal Consultant</p>
             </div>
             <div class="content">
               <h2>${title}</h2>
               <p>${excerpt}</p>
               <a href="${blogUrl}" class="button">Read Full Article</a>
               <hr style="margin-top: 30px; border: 0; border-top: 1px solid #eee;" />
-              <p style="font-size: 11px; color: #999;">You are receiving this because you subscribed to Al-Ahmad Law Firm updates.</p>
+              <p style="font-size: 11px; color: #999;">You are receiving this because you subscribed to Gulf Legal Consultant updates.</p>
             </div>
           </div>
           </div>
@@ -221,7 +221,7 @@ export async function sendNewSubscriberNotification(email: string) {
           <h1>New Newsletter Subscriber</h1>
         </div>
         <div class="content">
-          <p>A new user has subscribed to the Al-Ahmad Law Firm newsletter.</p>
+          <p>A new user has subscribed to the Gulf Legal Consultant newsletter.</p>
           <div class="details">
             <p><strong>Email Address:</strong> ${email}</p>
           </div>
@@ -235,9 +235,9 @@ export async function sendNewSubscriberNotification(email: string) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Ahmad Khan | Al-Ahmad Law Firm" <${process.env.EMAIL_USER}>`,
+    from: `"Advocate Ejaz | Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: 'Welcome to Al-Ahmad Law Firm Newsletter',
+    subject: 'Welcome to Gulf Legal Consultant Newsletter',
     html: `
       <!DOCTYPE html>
       <html>
@@ -252,7 +252,7 @@ export async function sendNewSubscriberNotification(email: string) {
         </div>
         <div class="content">
           <h2>Thank you for subscribing!</h2>
-          <p>You have successfully joined the Al-Ahmad Law Firm newsletter. You will now receive our latest legal insights and firm updates directly in your inbox.</p>
+          <p>You have successfully joined the Gulf Legal Consultant newsletter. You will now receive our latest legal insights and firm updates directly in your inbox.</p>
           <p>We look forward to sharing our expertise with you.</p>
         </div>
       </div>
@@ -305,9 +305,9 @@ export async function sendContactFormNotification(data: any) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Ahmad Khan | Al-Ahmad Law Firm" <${process.env.EMAIL_USER}>`,
+    from: `"Advocate Ejaz | Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: 'We Received Your Message - Al-Ahmad Law Firm',
+    subject: 'We Received Your Message - Gulf Legal Consultant',
     html: `
       <!DOCTYPE html>
       <html>
@@ -322,7 +322,7 @@ export async function sendContactFormNotification(data: any) {
         </div>
         <div class="content">
           <h2>Dear ${name},</h2>
-          <p>Thank you for reaching out to Al-Ahmad Law Firm. We have received your message regarding "<strong>${subject}</strong>" and our team will review it promptly.</p>
+          <p>Thank you for reaching out to Gulf Legal Consultant. We have received your message regarding "<strong>${subject}</strong>" and our team will review it promptly.</p>
           <p>One of our legal consultants will get back to you within 24-48 business hours.</p>
           <div class="details">
             <p><strong>Your Message:</strong></p>

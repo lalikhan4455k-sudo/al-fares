@@ -28,13 +28,13 @@ export default function Navbar() {
             <Link href="/" className="flex-shrink-0 flex items-center gap-3 group transition-all duration-500 hover:scale-105">
               <div className="relative">
                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-primary font-bold text-xl group-hover:rotate-[360deg] transition-transform duration-1000 shadow-lg shadow-secondary/20">
-                  AL
+                  GL
                 </div>
                 <div className="absolute -inset-1 bg-secondary/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-secondary tracking-tight uppercase group-hover:text-white transition-colors leading-none">Al-Ahmad</span>
-                <span className="text-[9px] text-light/50 tracking-[0.4em] uppercase group-hover:text-secondary transition-colors mt-1">Law Firm</span>
+                <span className="text-xl font-bold text-secondary tracking-tight uppercase group-hover:text-white transition-colors leading-none">Gulf Legal</span>
+                <span className="text-[9px] text-light/50 tracking-[0.4em] uppercase group-hover:text-secondary transition-colors mt-1">Consultant</span>
               </div>
             </Link>
           </div>

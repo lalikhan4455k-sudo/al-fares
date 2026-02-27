@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Award, BookOpen, Scale, ShieldCheck, GraduationCap, CheckCircle } from 'lucide-react';
 
 export const metadata = {
-  title: 'About The Lawyer | Al-Ahmad Law Firm',
+  title: 'About The Lawyer | Gulf Legal Consultant',
   description: 'Learn about our licensed legal consultant providing expert services across Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman, and Jordan.',
 };
 
@@ -37,7 +37,7 @@ export default function AboutPage() {
               <div className="aspect-[4/5] rounded-lg overflow-hidden relative z-10 shadow-xl">
                 <Image
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
-                  alt="Ahmad Khan - Legal Consultant"
+                  alt="Advocate Ejaz - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
@@ -112,7 +112,7 @@ export default function AboutPage() {
               <h3 className="text-sm font-bold text-secondary uppercase tracking-widest mb-6">Professional Timeline</h3>
               <div className="space-y-8">
                 {[
-                  { year: '2010 - Present', title: 'Managing Partner', company: 'Al-Ahmad Law Firm', desc: 'Leading strategic legal advisory for high-net-worth individuals and multinational corporations in KSA and UAE.' },
+                  { year: '2010 - Present', title: 'Managing Partner', company: 'Gulf Legal Consultant', desc: 'Leading strategic legal advisory for high-net-worth individuals and multinational corporations in KSA and UAE.' },
                   { year: '2005 - 2010', title: 'Senior Legal Consultant', company: 'International Legal Group', desc: 'Specialized in cross-border commercial litigation and corporate restructuring across the GCC.' },
                   { year: '2000 - 2005', title: 'Legal Associate', company: 'Regional Advocacy Chambers', desc: 'Focused on Sharia-compliant family law and civil litigation in Saudi Arabia.' }
                 ].map((item, i) => (

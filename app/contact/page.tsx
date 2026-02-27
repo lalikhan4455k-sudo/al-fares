@@ -94,7 +94,7 @@ export default function ContactPage() {
                     <h5 className="font-bold text-lg mb-2">Phone & Email</h5>
                     <p className="text-primary/70 mb-1 text-sm font-normal">+966 50 123 4567 (KSA)</p>
                     <p className="text-primary/70 mb-1 text-sm font-normal">+971 50 987 6543 (UAE)</p>
-                    <p className="text-primary/70 text-sm font-normal">info@alahmadlaw.com</p>
+                    <p className="text-primary/70 text-sm font-normal">info@gulflegalconsultant.com</p>
                   </div>
                 </div>
 
