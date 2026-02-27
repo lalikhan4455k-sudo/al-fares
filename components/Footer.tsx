@@ -111,7 +111,7 @@ export default function Footer() {
             <p className="text-sm mb-6 leading-relaxed">
               {t('newsletter.subtitle')}
             </p>
-            <form className="space-y-3" onSubmit={handleSubscribe}>
+            <form className="space-y-3" onSubmit={handleSubscribe} suppressHydrationWarning>
               <input 
                 type="email" 
                 placeholder={t('newsletter.placeholder')} 
@@ -119,11 +119,13 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-white/5 border border-secondary/20 rounded-sm px-4 py-2 text-sm focus:outline-none focus:border-secondary transition-colors"
+                suppressHydrationWarning
               />
               <button 
                 type="submit"
                 disabled={submitting}
                 className="w-full bg-secondary hover:bg-secondary-hover text-primary font-bold uppercase tracking-widest text-[10px] py-2 transition-colors disabled:opacity-50"
+                suppressHydrationWarning
               >
                 {submitting ? '...' : t('newsletter.button')}
               </button>
@@ -138,7 +140,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-secondary/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-light/60">
+          <p className="text-sm text-light/60" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} Al-Ahmad Law Firm. {t('footer.rights')}
           </p>
           <div className="flex space-x-6 text-sm text-light/60">

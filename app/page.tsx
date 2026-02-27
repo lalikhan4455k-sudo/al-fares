@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary">
+      <section className="relative min-h-[95vh] flex items-center overflow-hidden bg-primary">
         {/* Immersive Background */}
         <motion.div 
           initial={{ scale: 1.1 }}
@@ -130,16 +130,17 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ delay: 0.5, duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10 aspect-[4/5] rounded-sm overflow-hidden border border-secondary/20 shadow-2xl shadow-black/50"
+                className="relative z-10 w-full rounded-sm overflow-hidden border border-secondary/20 shadow-2xl shadow-black/50"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop"
+                  src="https://beveron.com/blog/assets/images/posts/twentyonenov.jpg"
                   alt="Legal Excellence"
-                  fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto object-contain transition-all duration-1000"
                   referrerPolicy="no-referrer"
+                  priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-60"></div>
               </motion.div>
               {/* Decorative Frame */}
               <div className="absolute -inset-6 border border-secondary/10 rounded-sm -z-10 translate-x-3 translate-y-3"></div>
@@ -228,7 +229,7 @@ export default function Home() {
                 className="relative z-10 aspect-[5/6] rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)]"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1556157382-97dee2dcb70c?q=80&w=1000&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop"
                   alt="Ahmad Khan - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"

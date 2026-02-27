@@ -8,19 +8,6 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  // Add pool for better performance and connection reuse
-  pool: true,
-  maxConnections: 5,
-  maxMessages: 100,
-});
-
-// Verify connection configuration
-transporter.verify(function (error, success) {
-  if (error) {
-    console.error('SMTP Connection Error:', error);
-  } else {
-    console.log('SMTP Server is ready to take our messages');
-  }
 });
 
 const EMAIL_STYLE = `

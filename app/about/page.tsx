@@ -36,7 +36,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5 relative">
               <div className="aspect-[4/5] rounded-lg overflow-hidden relative z-10 shadow-xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1556157382-97dee2dcb70c?q=80&w=800&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
                   alt="Ahmad Khan - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
