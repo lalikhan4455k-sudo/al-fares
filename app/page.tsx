@@ -75,12 +75,13 @@ export default function Home() {
         </motion.div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-8">
+          <div className="grid grid-cols-1 gap-12 items-center">
+            <div className="lg:col-span-12">
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-4xl"
               >
                 <div className="inline-flex items-center gap-4 px-5 py-1.5 rounded-full border border-secondary/30 bg-secondary/10 text-secondary mb-8 backdrop-blur-xl">
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
@@ -123,27 +124,6 @@ export default function Home() {
                   </Link>
                 </div>
               </motion.div>
-            </div>
-            
-            <div className="hidden lg:block lg:col-span-4 relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ delay: 0.5, duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10 w-full rounded-sm overflow-hidden border border-secondary/20 shadow-2xl shadow-black/50"
-              >
-                <Image
-                  src="https://beveron.com/blog/assets/images/posts/twentyonenov.jpg"
-                  alt="Legal Excellence"
-                  width={800}
-                  height={600}
-                  className="w-full h-auto object-contain transition-all duration-1000"
-                  referrerPolicy="no-referrer"
-                  priority
-                />
-              </motion.div>
-              {/* Decorative Frame */}
-              <div className="absolute -inset-6 border border-secondary/10 rounded-sm -z-10 translate-x-3 translate-y-3"></div>
             </div>
           </div>
         </div>
