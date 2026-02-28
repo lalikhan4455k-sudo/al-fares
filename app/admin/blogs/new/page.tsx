@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Save, Image as ImageIcon, FileText, User, Tag } from 'lucide-react';
+import { ArrowLeft, Save, Image as ImageIcon, FileText, User, Tag, Upload } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function NewBlogPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
@@ -16,6 +19,26 @@ export default function NewBlogPage() {
     category: 'Legal Updates',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
   });
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'admin123') {
+      setIsAuthenticated(true);
+    } else {
+      alert('Invalid password');
+    }
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, image: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,8 +62,40 @@ export default function NewBlogPage() {
     }
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-primary flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-sm shadow-2xl w-full max-w-md">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-primary font-bold text-2xl mx-auto mb-4">GL</div>
+            <h1 className="text-2xl font-serif font-bold text-primary">Admin Access</h1>
+            <p className="text-primary/60 text-sm">Please enter your administrator password.</p>
+          </div>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <input 
+                type="password" 
+                placeholder="Enter Password"
+                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors text-black"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button 
+              type="submit"
+              className="w-full bg-secondary text-primary font-bold py-4 rounded-sm uppercase tracking-widest text-xs hover:bg-secondary-hover transition-colors"
+            >
+              Login to Dashboard
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 p-12">
+    <div className="min-h-screen bg-gray-50 p-12 text-black">
       <div className="max-w-4xl mx-auto">
         <Link 
           href="/admin"
@@ -59,7 +114,7 @@ export default function NewBlogPage() {
               <input 
                 type="text" 
                 required
-                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors text-xl font-serif"
+                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors text-xl font-serif text-black"
                 placeholder="Enter a compelling title..."
                 value={formData.title}
                 onChange={(e) => setFormData({...formData, title: e.target.value})}
@@ -73,7 +128,7 @@ export default function NewBlogPage() {
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/40" />
                   <input 
                     type="text" 
-                    className="w-full p-4 pl-12 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors"
+                    className="w-full p-4 pl-12 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors text-black"
                     value={formData.author}
                     onChange={(e) => setFormData({...formData, author: e.target.value})}
                   />
@@ -84,7 +139,7 @@ export default function NewBlogPage() {
                 <div className="relative">
                   <Tag className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/40" />
                   <select 
-                    className="w-full p-4 pl-12 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors appearance-none"
+                    className="w-full p-4 pl-12 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors appearance-none text-black"
                     value={formData.category}
                     onChange={(e) => setFormData({...formData, category: e.target.value})}
                   >
@@ -101,7 +156,7 @@ export default function NewBlogPage() {
               <label className="block text-xs font-bold uppercase tracking-widest text-primary/60">Excerpt (Short Summary)</label>
               <textarea 
                 rows={3}
-                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors resize-none"
+                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors resize-none text-black"
                 placeholder="Briefly describe what this post is about..."
                 value={formData.excerpt}
                 onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
@@ -113,7 +168,7 @@ export default function NewBlogPage() {
               <textarea 
                 rows={12}
                 required
-                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors resize-none font-mono text-sm"
+                className="w-full p-4 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors resize-none font-mono text-sm text-black"
                 placeholder="Write your legal insight here..."
                 value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
@@ -121,15 +176,40 @@ export default function NewBlogPage() {
             </div>
 
             <div className="space-y-4">
-              <label className="block text-xs font-bold uppercase tracking-widest text-primary/60">Cover Image URL</label>
-              <div className="relative">
-                <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/40" />
-                <input 
-                  type="text" 
-                  className="w-full p-4 pl-12 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors"
-                  value={formData.image}
-                  onChange={(e) => setFormData({...formData, image: e.target.value})}
-                />
+              <label className="block text-xs font-bold uppercase tracking-widest text-primary/60">Cover Image</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="relative">
+                    <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/40" />
+                    <input 
+                      type="text" 
+                      placeholder="Image URL"
+                      className="w-full p-4 pl-12 border border-primary/10 rounded-sm focus:outline-none focus:border-secondary transition-colors text-black"
+                      value={formData.image}
+                      onChange={(e) => setFormData({...formData, image: e.target.value})}
+                    />
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-xs text-primary/40 uppercase font-bold">Or</span>
+                    <label className="flex-grow flex items-center justify-center gap-2 p-4 border-2 border-dashed border-primary/10 rounded-sm cursor-pointer hover:border-secondary hover:bg-secondary/5 transition-all">
+                      <Upload className="w-4 h-4 text-secondary" />
+                      <span className="text-xs font-bold uppercase tracking-widest text-primary/60">Upload from Gallery</span>
+                      <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
+                    </label>
+                  </div>
+                </div>
+                {formData.image && (
+                  <div className="relative aspect-video rounded-sm overflow-hidden border border-primary/10">
+                    <Image 
+                      src={formData.image} 
+                      alt="Preview" 
+                      fill 
+                      unoptimized
+                      className="object-cover" 
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -149,3 +229,4 @@ export default function NewBlogPage() {
     </div>
   );
 }
+

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Calendar as CalendarIcon, Clock, Video, MapPin, CreditCard, CheckCircle } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function BookingPage() {
   const { t } = useI18n();
@@ -25,31 +26,8 @@ export default function BookingPage() {
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          bookingData: formData,
-        }),
-      });
-
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || 'Failed to create checkout session');
-      }
-    } catch (error: any) {
-      alert(error.message);
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -239,7 +217,7 @@ export default function BookingPage() {
           )}
 
           {step === 3 && (
-            <form onSubmit={handleSubmit} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
               <h3 className="text-xl font-serif font-bold mb-4">{t('booking.detailsTitle')}</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -302,15 +280,57 @@ export default function BookingPage() {
                 >
                   {t('booking.back')}
                 </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-secondary hover:bg-secondary-hover text-primary px-8 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors disabled:opacity-50"
-                >
-                  {isSubmitting ? '...' : t('booking.confirmPay')}
-                </button>
+                
+                <div className="w-full max-w-[300px]">
+                  <PayPalScriptProvider options={{ 
+                    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "",
+                    currency: "USD",
+                    intent: "capture"
+                  }}>
+                    <PayPalButtons
+                      style={{ layout: "vertical", shape: "rect", label: "pay" }}
+                      disabled={!formData.name || !formData.email || !formData.phone}
+                      createOrder={async () => {
+                        try {
+                          const response = await fetch("/api/paypal/create-order", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ bookingData: formData }),
+                          });
+                          const order = await response.json();
+                          if (order.id) return order.id;
+                          throw new Error("Failed to create order");
+                        } catch (err) {
+                          console.error(err);
+                          alert("Could not initiate PayPal checkout.");
+                          return "";
+                        }
+                      }}
+                      onApprove={async (data) => {
+                        setIsSubmitting(true);
+                        try {
+                          const response = await fetch("/api/paypal/capture-order", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ orderId: data.orderID }),
+                          });
+                          const result = await response.json();
+                          if (result.success) {
+                            setStep(4);
+                          } else {
+                            throw new Error(result.error || "Payment capture failed");
+                          }
+                        } catch (err: any) {
+                          alert(err.message);
+                        } finally {
+                          setIsSubmitting(false);
+                        }
+                      }}
+                    />
+                  </PayPalScriptProvider>
+                </div>
               </div>
-            </form>
+            </div>
           )}
 
           {step === 4 && (

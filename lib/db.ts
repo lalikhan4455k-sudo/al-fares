@@ -29,7 +29,7 @@ db.exec(`
     phone TEXT NOT NULL,
     notes TEXT,
     payment_status TEXT DEFAULT 'pending',
-    stripe_session_id TEXT,
+    paypal_order_id TEXT,
     email_sent INTEGER DEFAULT 0
   );
 
