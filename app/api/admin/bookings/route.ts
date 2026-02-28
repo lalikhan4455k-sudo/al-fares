@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { sql } from '@vercel/postgres';
 
 export async function GET() {
   try {
-    const bookings = db.prepare('SELECT * FROM bookings ORDER BY id DESC').all();
+    const { rows: bookings } = await sql`SELECT * FROM bookings ORDER BY id DESC`;
     return NextResponse.json(bookings);
   } catch (error: any) {
     console.error('Error fetching bookings:', error);

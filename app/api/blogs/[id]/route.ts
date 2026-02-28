@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { sql } from '@vercel/postgres';
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const blog = db.prepare('SELECT * FROM blogs WHERE id = ?').get(id);
+    const { rows } = await sql`SELECT * FROM blogs WHERE id = ${id}`;
+    const blog = rows[0];
+    
     if (!blog) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
     }
@@ -21,11 +23,11 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const body = await req.json();
     const { title, excerpt, content, author, category, image } = body;
 
-    db.prepare(`
+    await sql`
       UPDATE blogs 
-      SET title = ?, excerpt = ?, content = ?, author = ?, category = ?, image = ?
-      WHERE id = ?
-    `).run(title, excerpt, content, author, category, image, id);
+      SET title = ${title}, excerpt = ${excerpt}, content = ${content}, author = ${author}, category = ${category}, image = ${image}
+      WHERE id = ${id}
+    `;
 
     return NextResponse.json({ message: 'Blog updated successfully' });
   } catch (error) {
@@ -37,7 +39,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    db.prepare('DELETE FROM blogs WHERE id = ?').run(id);
+    await sql`DELETE FROM blogs WHERE id = ${id}`;
     return NextResponse.json({ message: 'Blog deleted successfully' });
   } catch (error) {
     console.error('Delete blog error:', error);

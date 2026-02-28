@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { sql } from '@vercel/postgres';
 import { sendNewSubscriberNotification } from '@/lib/email';
 
 export async function POST(req: Request) {
@@ -10,8 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
-    const stmt = db.prepare('INSERT INTO subscribers (email) VALUES (?)');
-    stmt.run(email);
+    await sql`INSERT INTO subscribers (email) VALUES (${email})`;
 
     // Notify owner
     try {
@@ -22,7 +21,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: 'Subscribed successfully' });
   } catch (error: any) {
-    if (error.code === 'SQLITE_CONSTRAINT') {
+    // Check for duplicate key error in Postgres (code 23505)
+    if (error.code === '23505') {
       return NextResponse.json({ message: 'Already subscribed' });
     }
     console.error('Subscription error:', error);
