@@ -49,6 +49,22 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDeleteBlog = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this blog post?')) return;
+    
+    try {
+      const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        fetchBlogs();
+      } else {
+        alert('Failed to delete blog');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('Error deleting blog');
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-primary flex items-center justify-center p-4">
@@ -175,8 +191,18 @@ export default function AdminDashboard() {
                         </span>
                       </td>
                       <td className="p-4 text-right space-x-2">
-                        <button className="p-2 text-primary/40 hover:text-primary transition-colors"><Edit className="w-4 h-4" /></button>
-                        <button className="p-2 text-primary/40 hover:text-red-600 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                        <Link 
+                          href={`/admin/blogs/edit/${blog.id}`}
+                          className="inline-block p-2 text-primary/40 hover:text-primary transition-colors"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Link>
+                        <button 
+                          onClick={() => handleDeleteBlog(blog.id)}
+                          className="p-2 text-primary/40 hover:text-red-600 transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </td>
                     </tr>
                   ))}

@@ -50,6 +50,7 @@ export default function Home() {
             className="object-cover opacity-30 mix-blend-luminosity"
             referrerPolicy="no-referrer"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-tr from-primary via-primary/80 to-transparent"></div>
           
@@ -214,6 +215,7 @@ export default function Home() {
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                   referrerPolicy="no-referrer"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
               </motion.div>
@@ -480,7 +482,14 @@ export default function Home() {
                   className="lg:col-span-7 group relative overflow-hidden rounded-xl"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image src={latestBlogs[0].image} alt={latestBlogs[0].title} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" referrerPolicy="no-referrer" />
+                    <Image 
+                      src={latestBlogs[0].image} 
+                      alt={latestBlogs[0].title} 
+                      fill 
+                      className="object-cover group-hover:scale-105 transition-transform duration-1000" 
+                      referrerPolicy="no-referrer" 
+                      sizes="(max-width: 768px) 100vw, 60vw"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
                   </div>
                   <div className="absolute bottom-0 left-0 p-8 w-full">
@@ -509,7 +518,14 @@ export default function Home() {
                       className="group flex gap-5 items-center p-5 bg-light rounded-xl border border-primary/5 hover:border-secondary/30 transition-all duration-500"
                     >
                       <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
-                        <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                        <Image 
+                          src={post.image} 
+                          alt={post.title} 
+                          fill 
+                          className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                          referrerPolicy="no-referrer" 
+                          sizes="96px"
+                        />
                       </div>
                       <div>
                         <p className="text-[8px] text-secondary uppercase tracking-widest mb-1.5 font-bold">{post.category}</p>
@@ -619,11 +635,17 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 bg-secondary relative overflow-hidden">
         <motion.div 
-          animate={{ scale: [1, 1.1, 1] }}
+          animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute inset-0"
         >
-          <Image src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" alt="CTA Background" fill className="opacity-10 mix-blend-multiply object-cover" />
+          <Image 
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" 
+            alt="CTA Background" 
+            fill 
+            className="opacity-10 mix-blend-multiply object-cover" 
+            sizes="100vw"
+          />
         </motion.div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
