@@ -327,7 +327,7 @@ export default function Home() {
               <h2 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">{t('services.title')}</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">{t('services.subtitle')}</h3>
             </div>
-            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed text-left lg:text-right">
+            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed text-left">
               Comprehensive legal solutions tailored to protect your personal and business interests across jurisdictions.
             </p>
           </div>
@@ -385,7 +385,7 @@ export default function Home() {
               <h2 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Our Advantage</h2>
               <h3 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Why Choose <span className="text-secondary">Gulf Legal Consultant</span></h3>
             </div>
-            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed text-left lg:text-right">
+            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed text-left">
               We combine deep regional expertise with international standards to deliver exceptional legal outcomes.
             </p>
           </div>
