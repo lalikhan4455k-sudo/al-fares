@@ -1,5 +1,5 @@
 {
-  "name": "ai-studio-applet",
+  "name": "gulf-legal-consultant",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
     "clean": "next clean"
   },
   "dependencies": {
-    "@google/genai": "^1.17.0",
     "@hookform/resolvers": "^5.2.1",
     "@paypal/react-paypal-js": "^9.0.0",
     "@types/better-sqlite3": "^7.6.13",

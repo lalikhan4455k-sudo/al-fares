@@ -1,10 +1,18 @@
 import { NextResponse } from 'next/server';
+import db, { isPostgres } from '@/lib/db';
 import { sql } from '@vercel/postgres';
 import { sendBlogUpdate } from '@/lib/email';
 
 export async function GET() {
   try {
-    const { rows: blogs } = await sql`SELECT * FROM blogs ORDER BY id DESC`;
+    let blogs: any[] = [];
+
+    if (isPostgres) {
+      const { rows } = await sql`SELECT * FROM blogs ORDER BY id DESC`;
+      blogs = rows;
+    } else {
+      blogs = db.prepare('SELECT * FROM blogs ORDER BY id DESC').all();
+    }
     
     if (blogs.length === 0) {
       // Auto-seed if empty
@@ -13,7 +21,7 @@ export async function GET() {
           title: 'Understanding Corporate Law in Saudi Arabia',
           excerpt: 'A comprehensive guide to the latest changes in corporate regulations and compliance for businesses operating in the Kingdom.',
           content: 'Corporate law in Saudi Arabia has undergone significant transformations recently...',
-          author: 'Advocate Ejaz',
+          author: 'Dedicated Lawyer',
           category: 'Corporate Law',
           image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
           date: 'February 15, 2024'
@@ -30,14 +38,25 @@ export async function GET() {
       ];
 
       for (const post of seedData) {
-        await sql`
-          INSERT INTO blogs (title, excerpt, content, author, category, image, date, published)
-          VALUES (${post.title}, ${post.excerpt}, ${post.content}, ${post.author}, ${post.category}, ${post.image}, ${post.date}, 1)
-        `;
+        if (isPostgres) {
+          await sql`
+            INSERT INTO blogs (title, excerpt, content, author, category, image, date, published)
+            VALUES (${post.title}, ${post.excerpt}, ${post.content}, ${post.author}, ${post.category}, ${post.image}, ${post.date}, 1)
+          `;
+        } else {
+          db.prepare(`
+            INSERT INTO blogs (title, excerpt, content, author, category, image, date, published)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 1)
+          `).run(post.title, post.excerpt, post.content, post.author, post.category, post.image, post.date);
+        }
       }
 
-      const { rows: seededBlogs } = await sql`SELECT * FROM blogs ORDER BY id DESC`;
-      return NextResponse.json(seededBlogs);
+      if (isPostgres) {
+        const { rows } = await sql`SELECT * FROM blogs ORDER BY id DESC`;
+        blogs = rows;
+      } else {
+        blogs = db.prepare('SELECT * FROM blogs ORDER BY id DESC').all();
+      }
     }
 
     return NextResponse.json(blogs);
@@ -58,17 +77,33 @@ export async function POST(req: Request) {
       day: 'numeric',
     });
 
-    const result = await sql`
-      INSERT INTO blogs (title, excerpt, content, author, category, image, date, published)
-      VALUES (${title}, ${excerpt}, ${content}, ${author}, ${category}, ${image}, ${date}, 1)
-      RETURNING id
-    `;
+    let blogId: number | string;
 
-    const blogId = result.rows[0].id;
+    if (isPostgres) {
+      const result = await sql`
+        INSERT INTO blogs (title, excerpt, content, author, category, image, date, published)
+        VALUES (${title}, ${excerpt}, ${content}, ${author}, ${category}, ${image}, ${date}, 1)
+        RETURNING id
+      `;
+      blogId = result.rows[0].id;
+    } else {
+      const info = db.prepare(`
+        INSERT INTO blogs (title, excerpt, content, author, category, image, date, published)
+        VALUES (?, ?, ?, ?, ?, ?, ?, 1)
+      `).run(title, excerpt, content, author, category, image, date);
+      blogId = info.lastInsertRowid;
+    }
 
     // Notify subscribers
     try {
-      const { rows: subscribers } = await sql`SELECT email FROM subscribers`;
+      let subscribers: { email: string }[] = [];
+      if (isPostgres) {
+        const { rows } = await sql`SELECT email FROM subscribers`;
+        subscribers = rows as { email: string }[];
+      } else {
+        subscribers = db.prepare('SELECT email FROM subscribers').all() as { email: string }[];
+      }
+
       if (subscribers.length > 0) {
         const emails = subscribers.map(s => s.email);
         await sendBlogUpdate(emails, { id: blogId, title, excerpt });

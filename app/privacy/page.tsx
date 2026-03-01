@@ -25,7 +25,7 @@ export default function PrivacyPage() {
 
             <h2 className="text-3xl font-bold text-primary mb-6">1. Introduction</h2>
             <p>
-              Gulf Legal Consultant (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;), led by Advocate Ejaz, is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our legal consultation services.
+              Gulf Legal Consultant (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;), led by a dedicated lawyer, is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our legal consultation services.
             </p>
 
             <h2 className="text-3xl font-bold text-primary mb-6 mt-12">2. Information We Collect</h2>

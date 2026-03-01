@@ -25,7 +25,7 @@ export default function TermsPage() {
 
             <h2 className="text-3xl font-bold text-primary mb-6">1. Agreement to Terms</h2>
             <p>
-              These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and Gulf Legal Consultant (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), led by Advocate Ejaz, concerning your access to and use of the website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
+              These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and Gulf Legal Consultant (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), led by a dedicated lawyer, concerning your access to and use of the website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
             </p>
 
             <h2 className="text-3xl font-bold text-primary mb-6 mt-12">2. Intellectual Property Rights</h2>

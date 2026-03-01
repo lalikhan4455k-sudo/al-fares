@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Scale, Briefcase, FileText, Users, Building, Gavel, Star, CheckCircle2, Shield, Globe, Clock, MessageCircle, MapPin, Phone, Mail, Send, Award, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Scale, Briefcase, FileText, Users, Building, Gavel, Star, CheckCircle2, Shield, Globe, Clock, MessageCircle, MapPin, Phone, Mail, Send, Award, ShieldCheck, CreditCard } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import Link from 'next/link';
@@ -167,6 +167,12 @@ export default function Home() {
                     title: t('process.step3Title'), 
                     desc: t('process.step3Desc'),
                     icon: Shield
+                  },
+                  { 
+                    step: '04', 
+                    title: t('process.step4Title'), 
+                    desc: t('process.step4Desc'),
+                    icon: CreditCard
                   }
                 ].map((item, i) => (
                   <motion.div 
@@ -211,7 +217,7 @@ export default function Home() {
               >
                 <Image
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop"
-                  alt="Advocate Ejaz - Legal Consultant"
+                  alt="Dedicated Lawyer - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                   referrerPolicy="no-referrer"
@@ -252,7 +258,7 @@ export default function Home() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                   {[
-                    'Licensed in KSA & UAE',
+                    'Licensed Lawyer',
                     'Corporate Specialist',
                     'Strategic Guidance',
                     'Bilingual Advisory'
@@ -316,12 +322,12 @@ export default function Home() {
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
             <div className="max-w-xl">
               <h2 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">{t('services.title')}</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">{t('services.subtitle')}</h3>
             </div>
-            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed">
+            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed text-left lg:text-right">
               Comprehensive legal solutions tailored to protect your personal and business interests across jurisdictions.
             </p>
           </div>
@@ -374,12 +380,12 @@ export default function Home() {
       {/* Why Choose Us Section - Bento Grid Layout */}
       <section className="py-24 bg-white text-primary overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
             <div className="max-w-xl">
               <h2 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Our Advantage</h2>
               <h3 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Why Choose <span className="text-secondary">Gulf Legal Consultant</span></h3>
             </div>
-            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed">
+            <p className="text-primary/60 max-w-sm text-lg font-normal leading-relaxed text-left lg:text-right">
               We combine deep regional expertise with international standards to deliver exceptional legal outcomes.
             </p>
           </div>

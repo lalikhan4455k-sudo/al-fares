@@ -167,7 +167,7 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
   for (const email of subscribers) {
     try {
       await transporter.sendMail({
-        from: `"Advocate Ejaz | Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
+        from: `"Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: `Legal Insight: ${title}`,
         html: `
@@ -235,7 +235,7 @@ export async function sendNewSubscriberNotification(email: string) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Advocate Ejaz | Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
+    from: `"Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'Welcome to Gulf Legal Consultant Newsletter',
     html: `
@@ -305,7 +305,7 @@ export async function sendContactFormNotification(data: any) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Advocate Ejaz | Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
+    from: `"Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'We Received Your Message - Gulf Legal Consultant',
     html: `

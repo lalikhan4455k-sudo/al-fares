@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { capturePayment } from '@/lib/paypal';
 import { sendBookingConfirmation } from '@/lib/email';
+import db, { isPostgres } from '@/lib/db';
 import { sql } from '@vercel/postgres';
 
 export async function POST(req: Request) {
@@ -18,12 +19,17 @@ export async function POST(req: Request) {
       const metadata = JSON.parse(purchaseUnit.payments.captures[0].custom_id || purchaseUnit.custom_id || '{}');
       
       console.log(`PayPal capture processing order: ${orderId}`);
-      let dbId: number | null = null;
+      let dbId: number | string | null = null;
 
       // 1. Try to save to DB
       try {
-        const { rows: existingRows } = await sql`SELECT id, email_sent FROM bookings WHERE paypal_order_id = ${orderId}`;
-        const existing = existingRows[0];
+        let existing: any;
+        if (isPostgres) {
+          const { rows } = await sql`SELECT id, email_sent FROM bookings WHERE paypal_order_id = ${orderId}`;
+          existing = rows[0];
+        } else {
+          existing = db.prepare('SELECT id, email_sent FROM bookings WHERE paypal_order_id = ?').get(orderId);
+        }
         
         if (existing) {
           console.log(`Booking already exists in DB with ID: ${existing.id}`);
@@ -32,24 +38,42 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: true, message: 'Already processed' });
           }
         } else {
-          const result = await sql`
-            INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, paypal_order_id, email_sent)
-            VALUES (
-              ${metadata.service || 'N/A'}, 
-              ${metadata.type || 'online'}, 
-              ${metadata.date || 'N/A'}, 
-              ${metadata.time || 'N/A'}, 
-              ${metadata.name || 'N/A'}, 
-              ${metadata.email || 'N/A'}, 
-              ${metadata.phone || 'N/A'}, 
-              ${metadata.notes || ''}, 
-              'paid', 
-              ${orderId}, 
-              0
-            )
-            RETURNING id
-          `;
-          dbId = result.rows[0].id;
+          if (isPostgres) {
+            const result = await sql`
+              INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, paypal_order_id, email_sent)
+              VALUES (
+                ${metadata.service || 'N/A'}, 
+                ${metadata.type || 'online'}, 
+                ${metadata.date || 'N/A'}, 
+                ${metadata.time || 'N/A'}, 
+                ${metadata.name || 'N/A'}, 
+                ${metadata.email || 'N/A'}, 
+                ${metadata.phone || 'N/A'}, 
+                ${metadata.notes || ''}, 
+                'paid', 
+                ${orderId}, 
+                0
+              )
+              RETURNING id
+            `;
+            dbId = result.rows[0].id;
+          } else {
+            const result = db.prepare(`
+              INSERT INTO bookings (service, type, date, time, name, email, phone, notes, payment_status, paypal_order_id, email_sent)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid', ?, 0)
+            `).run(
+              metadata.service || 'N/A',
+              metadata.type || 'online',
+              metadata.date || 'N/A',
+              metadata.time || 'N/A',
+              metadata.name || 'N/A',
+              metadata.email || 'N/A',
+              metadata.phone || 'N/A',
+              metadata.notes || '',
+              orderId
+            );
+            dbId = result.lastInsertRowid;
+          }
           console.log(`Saved new booking to DB with ID: ${dbId}`);
         }
       } catch (dbError) {
@@ -63,7 +87,11 @@ export async function POST(req: Request) {
         
         if (sent && dbId) {
           try {
-            await sql`UPDATE bookings SET email_sent = 1 WHERE id = ${dbId}`;
+            if (isPostgres) {
+              await sql`UPDATE bookings SET email_sent = 1 WHERE id = ${dbId}`;
+            } else {
+              db.prepare('UPDATE bookings SET email_sent = 1 WHERE id = ?').run(dbId);
+            }
           } catch (updateError) {
             console.error('Failed to update email_sent status in DB:', updateError);
           }

@@ -37,7 +37,7 @@ export default function AboutPage() {
               <div className="aspect-[4/5] rounded-lg overflow-hidden relative z-10 shadow-xl">
                 <Image
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
-                  alt="Advocate Ejaz - Legal Consultant"
+                  alt="Dedicated Lawyer - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
@@ -79,6 +79,8 @@ export default function AboutPage() {
                     <li>• LL.M. in International Commercial Law</li>
                     <li>• Bachelor of Laws (LL.B.)</li>
                     <li>• Diploma in Sharia Law</li>
+                    <li>• Specialized in Anti-Money Laundering Matters</li>
+                    <li>• Specialized in Immigration Laws</li>
                   </ul>
                 </div>
                 <div className="bg-white p-6 shadow-sm border border-primary/5 rounded-sm">
