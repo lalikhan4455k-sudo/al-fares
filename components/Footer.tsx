@@ -55,7 +55,17 @@ export default function Footer() {
             <p className="text-sm leading-relaxed">
               {t('about.description')}
             </p>
-            <div className="flex space-x-4">
+            <div className="space-y-2 pt-2">
+              <div className="flex items-center gap-3 text-sm">
+                <Phone className="w-4 h-4 text-secondary" />
+                <span>+966 59 251 5012</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm">
+                <Mail className="w-4 h-4 text-secondary" />
+                <span>info@gulflegalconsultant.com</span>
+              </div>
+            </div>
+            <div className="flex space-x-4 pt-4">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Linkedin className="w-5 h-5" /></a>
@@ -92,9 +102,11 @@ export default function Footer() {
                 t('services.corporate'),
                 t('services.family'),
                 t('services.litigation'),
-                t('services.realEstate'),
-                t('services.employment'),
-                t('services.intellectual')
+                t('services.visitVisa'),
+                t('services.insurance'),
+                t('services.loan'),
+                t('services.cyber'),
+                t('services.investor')
               ].map((item) => (
                 <li key={item}>
                   <Link href="/services" className="text-sm hover:text-secondary transition-colors flex items-center gap-2">

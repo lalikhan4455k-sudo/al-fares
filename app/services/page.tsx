@@ -1,6 +1,6 @@
 'use client';
 
-import { Users, Building, Scale, Briefcase, FileText, Gavel, MonitorPlay, ArrowRight } from 'lucide-react';
+import { Users, Building, Scale, Briefcase, FileText, Gavel, MonitorPlay, ArrowRight, Shield, CreditCard, ShieldCheck, Globe } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'motion/react';
@@ -16,7 +16,7 @@ const services = [
     id: 'corporate-law',
     icon: Building,
     title: 'Corporate Law',
-    description: 'Strategic legal counsel for businesses of all sizes. From company formation and restructuring to mergers, acquisitions, and corporate governance compliance in KSA, UAE, and the broader Middle East.',
+    description: 'Strategic legal counsel for businesses of all sizes. From company formation and restructuring to mergers, acquisitions, and corporate governance compliance in KSA, UAE, and the broader Middle Middle East.',
   },
   {
     id: 'civil-law',
@@ -25,10 +25,34 @@ const services = [
     description: 'Expert representation in civil disputes. We protect your rights in property disputes, debt recovery, tort claims, and other civil litigation matters with a focus on favorable resolutions across regional jurisdictions.',
   },
   {
-    id: 'business-contracts',
+    id: 'visit-visa',
     icon: Briefcase,
-    title: 'Business Contracts',
-    description: 'Meticulous drafting, review, and negotiation of commercial agreements. We ensure your contracts are legally sound, protecting your interests and minimizing future liabilities in cross-border transactions.',
+    title: 'Visit Visa & Family Visa',
+    description: 'Comprehensive legal support for visit and family visa applications. We navigate complex immigration regulations to ensure smooth processing for individuals and families across the Gulf region.',
+  },
+  {
+    id: 'insurance-services',
+    icon: Shield,
+    title: 'Insurance Services',
+    description: 'Professional legal advisory for all types of insurance matters. We assist with policy reviews, claim disputes, and regulatory compliance to protect your interests against insurance providers.',
+  },
+  {
+    id: 'loan-financing',
+    icon: CreditCard,
+    title: 'Loan Financing Services',
+    description: 'Expert guidance on banking and finance laws. We provide legal support for loan agreements, mortgage financing, and debt restructuring for both personal and commercial clients.',
+  },
+  {
+    id: 'cyber-crime',
+    icon: ShieldCheck,
+    title: 'Cyber Crime',
+    description: 'Specialized legal protection in the digital landscape. We handle cases involving online fraud, data breaches, digital harassment, and other cyber-related offenses under regional cyber laws.',
+  },
+  {
+    id: 'foreigner-investors',
+    icon: Globe,
+    title: 'Foreigner Investors Services',
+    description: 'Strategic legal counsel for international investors. We provide comprehensive support for business setup, regulatory compliance, and investment protection for foreigners entering Middle Eastern markets.',
   },
   {
     id: 'legal-documentation',

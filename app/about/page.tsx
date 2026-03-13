@@ -56,19 +56,35 @@ export default function AboutPage() {
             <div className="lg:col-span-7">
               <h3 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Professional Biography</h3>
               <h4 className="text-3xl md:text-4xl font-bold mb-8 leading-tight tracking-tight">
-                A Decade of Legal Excellence in <span className="text-secondary">the Middle East</span>
+                Over 13 Years of <span className="text-secondary">Legal Excellence</span>
               </h4>
               
               <div className="prose prose-lg text-primary/80 mb-10 max-w-none">
                 <p className="mb-6 text-lg leading-relaxed font-normal">
-                  With over 15 years of dedicated legal practice, I have established a reputation for delivering strategic, results-oriented legal counsel to individuals and corporations across the GCC and broader Middle East. My regional expertise allows me to navigate complex cross-border legal challenges with precision.
+                  GLC is an experienced Legal Consultancy firm, with over 13 years of practice across, UAE, Oman, Qatar, Kuwait, Philippine, India, Bangladesh, Pakistan, Egypt and the Kingdom of Saudi Arabia. GLC specializes in labor law, civil matters, corporate advisory, and cross-border legal support for businesses and individuals operating in the Gulf region.
                 </p>
                 <p className="mb-6 text-lg leading-relaxed font-normal">
-                  My career began with a profound commitment to justice and a deep understanding of Islamic law (Sharia) and modern civil law systems. Over the years, I have successfully represented clients in high-stakes corporate litigation, sensitive family disputes, and intricate commercial negotiations in Saudi Arabia, UAE, Qatar, and beyond.
+                  Since 2013 GLC is known for practical, business-focused legal solutions, including drafting legal notices, contract review, and regulatory compliance advisory. GLC maintains strategic joint ventures with licensed law firm, in every jurisdiction across Middle East and beyond, enabling broader legal coverage within the GCC.
                 </p>
                 <p className="text-lg leading-relaxed font-normal">
-                  I believe in a client-first approach, ensuring that every legal strategy is tailored to the unique needs and goals of the individuals and businesses I represent. Transparency, ethical practice, and relentless advocacy are the cornerstones of my firm.
+                  GLC is committed to delivering efficient, technology-driven legal consultancy tailored to modern client needs. We believe in a client-first approach, ensuring that every legal strategy is tailored to the unique needs and goals of the individuals and businesses we represent.
                 </p>
+              </div>
+
+              {/* Office Video Section */}
+              <div className="mb-16">
+                <h3 className="text-sm font-bold text-secondary uppercase tracking-widest mb-6">Our Office Environment</h3>
+                <div className="aspect-video rounded-xl overflow-hidden bg-primary/5 relative group border border-primary/10 shadow-lg">
+                  <iframe 
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1&loop=1&playlist=dQw4w9WgXcQ" 
+                    title="Office Environment"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                  <div className="absolute inset-0 bg-primary/20 pointer-events-none group-hover:bg-transparent transition-colors duration-500"></div>
+                </div>
+                <p className="mt-4 text-xs text-primary/50 italic font-normal">A glimpse into our professional workspace where strategic legal solutions are crafted.</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">

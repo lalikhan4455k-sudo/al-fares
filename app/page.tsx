@@ -249,11 +249,11 @@ export default function Home() {
               >
                 <h2 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">{t('about.title')}</h2>
                 <h3 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
-                  Dedicated to <br/>
-                  <span className="text-secondary">Justice & Excellence</span>
+                  13+ Years of <br/>
+                  <span className="text-secondary">Legal Excellence</span>
                 </h3>
                 <p className="text-primary/70 text-lg mb-8 leading-relaxed font-normal">
-                  {t('about.description')}
+                  GLC is an experienced Legal Consultancy firm with over 13 years of practice across the UAE, Oman, Qatar, Kuwait, Philippines, India, Bangladesh, Pakistan, Egypt, and KSA.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
@@ -337,9 +337,12 @@ export default function Home() {
               { icon: Users, title: t('services.family'), desc: 'Compassionate guidance through divorce, custody, and inheritance matters.' },
               { icon: Building, title: t('services.corporate'), desc: 'Strategic counsel for business formation, mergers, and corporate governance.' },
               { icon: Scale, title: t('services.litigation'), desc: 'Expert legal advisory services in civil disputes, property rights, and liability claims.' },
-              { icon: Briefcase, title: 'Business Contracts', desc: 'Drafting, reviewing, and negotiating commercial agreements to protect your interests.' },
+              { icon: Briefcase, title: t('services.visitVisa'), desc: 'Comprehensive support for visit and family visa applications and regulations.' },
+              { icon: Shield, title: t('services.insurance'), desc: 'Professional legal advisory for insurance claims, policies, and disputes.' },
+              { icon: CreditCard, title: t('services.loan'), desc: 'Expert guidance on loan financing, banking regulations, and financial agreements.' },
+              { icon: ShieldCheck, title: t('services.cyber'), desc: 'Legal protection and advisory for cyber crime and digital security matters.' },
+              { icon: Globe, title: t('services.investor'), desc: 'Strategic counsel for foreign investors navigating regional legal landscapes.' },
               { icon: FileText, title: 'Legal Documentation', desc: 'Precise preparation of legal documents, wills, and power of attorney.' },
-              { icon: Gavel, title: 'Strategic Legal Guidance', desc: 'Professional legal guidance and advisory services across KSA and UAE jurisdictions.' },
             ].map((service, i) => (
               <motion.div 
                 key={i}

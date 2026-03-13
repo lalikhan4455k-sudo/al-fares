@@ -68,9 +68,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h5 className="font-bold text-lg mb-2">Saudi Arabia Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">King Fahd Road, Olaya District</p>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">Jawazat office, in front passport office metro station</p>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">District Moharaba, King Fahd Road</p>
                     <p className="text-primary/70 mb-2 text-sm font-normal">Riyadh 12211, Saudi Arabia</p>
-                    <a href="https://maps.google.com/?q=King+Fahd+Road,+Olaya+District,+Riyadh" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Jawazat+office+King+Fahd+Road+Riyadh" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
                   </div>
                 </div>
 
@@ -80,9 +81,45 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h5 className="font-bold text-lg mb-2">Dubai Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Sheikh Zayed Road, DIFC</p>
-                    <p className="text-primary/70 mb-2 text-sm font-normal">Dubai, United Arab Emirates</p>
-                    <a href="https://maps.google.com/?q=Sheikh+Zayed+Road,+DIFC,+Dubai" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">Gulf legal consultant, office no 10-A, 7th floor</p>
+                    <p className="text-primary/70 mb-2 text-sm font-normal">Al Ameri Tower, Barsha Heights, Dubai, UAE</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Al+Ameri+Tower+Barsha+Heights+Dubai" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-secondary" />
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-lg mb-2">Pakistan Office</h5>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">Chamber no:376A, Sir syed block</p>
+                    <p className="text-primary/70 mb-2 text-sm font-normal">Old district court, F/8, Islamabad, Pakistan</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Old+District+Court+F/8+Islamabad" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-secondary" />
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-lg mb-2">Philippine Office</h5>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">Gulf legal consultant, office no:5, 5th Floor</p>
+                    <p className="text-primary/70 mb-2 text-sm font-normal">Oracle plaza, 9th Avenue, Global City, Taguig, Philippines</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Oracle+Plaza+9th+Avenue+Taguig" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-secondary" />
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-lg mb-2">India Office</h5>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">12th Floor, Business Park, MG Road</p>
+                    <p className="text-primary/70 mb-2 text-sm font-normal">Bangalore, Karnataka 560001, India</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=MG+Road+Bangalore+India" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
                   </div>
                 </div>
 
@@ -92,8 +129,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h5 className="font-bold text-lg mb-2">Phone & Email</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">+966 50 123 4567 (KSA)</p>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">+971 50 987 6543 (UAE)</p>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">+966 59 251 5012</p>
                     <p className="text-primary/70 text-sm font-normal">info@gulflegalconsultant.com</p>
                   </div>
                 </div>
@@ -132,7 +168,7 @@ export default function ContactPage() {
                   For urgent inquiries, you can reach our legal team directly via WhatsApp. We typically respond within 1 hour during business hours.
                 </p>
                 <a 
-                  href="https://wa.me/966501234567" 
+                  href="https://wa.me/966592515012" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors w-full sm:w-auto"
