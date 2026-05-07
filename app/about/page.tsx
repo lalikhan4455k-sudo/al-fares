@@ -71,22 +71,6 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* Office Video Section */}
-              <div className="mb-16">
-                <h3 className="text-sm font-bold text-secondary uppercase tracking-widest mb-6">Our Office Environment</h3>
-                <div className="aspect-video rounded-xl overflow-hidden bg-primary/5 relative group border border-primary/10 shadow-lg">
-                  <iframe 
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1&loop=1&playlist=dQw4w9WgXcQ" 
-                    title="Office Environment"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                  ></iframe>
-                  <div className="absolute inset-0 bg-primary/20 pointer-events-none group-hover:bg-transparent transition-colors duration-500"></div>
-                </div>
-                <p className="mt-4 text-xs text-primary/50 italic font-normal">A glimpse into our professional workspace where strategic legal solutions are crafted.</p>
-              </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 <div className="bg-white p-6 shadow-sm border border-primary/5 rounded-sm">
                   <GraduationCap className="w-10 h-10 text-secondary mb-4" />
