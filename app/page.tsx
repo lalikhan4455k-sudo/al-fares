@@ -44,7 +44,7 @@ export default function Home() {
           className="absolute inset-0 z-0"
         >
           <Image
-            src="/GULF%20LEGAL%20CONSULTANT.jpeg"
+            src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=1920&auto=format&fit=crop"
             alt="Law Office"
             fill
             className="object-cover opacity-30 mix-blend-luminosity"
@@ -649,7 +649,7 @@ export default function Home() {
           className="absolute inset-0"
         >
           <Image 
-            src="/GULF%20LEGAL%20CONSULTANT.jpeg" 
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" 
             alt="CTA Background" 
             fill 
             className="opacity-10 mix-blend-multiply object-cover" 

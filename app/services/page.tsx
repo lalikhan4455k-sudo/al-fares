@@ -85,7 +85,7 @@ export default function ServicesPage() {
           transition={{ duration: 10 }}
           className="absolute inset-0 z-0"
         >
-          <Image src="/GULF%20LEGAL%20CONSULTANT.jpeg" alt="Background" fill className="opacity-10 object-cover mix-blend-overlay" />
+          <Image src="https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=1920&auto=format&fit=crop" alt="Background" fill className="opacity-10 object-cover mix-blend-overlay" />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-primary z-10"></div>
         
@@ -193,7 +193,7 @@ export default function ServicesPage() {
             
             <div className="relative">
               <div className="aspect-[4/3] rounded-lg overflow-hidden relative z-10">
-                <Image src="/GULF%20LEGAL%20CONSULTANT.jpeg" alt="Legal Strategy" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <Image src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=800&auto=format&fit=crop" alt="Legal Strategy" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
               </div>
               <div className="absolute -top-8 -left-8 w-32 h-32 border-t-2 border-l-2 border-secondary/30 z-0"></div>
               <div className="absolute -bottom-8 -right-8 w-32 h-32 border-b-2 border-r-2 border-secondary/30 z-0"></div>

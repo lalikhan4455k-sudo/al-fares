@@ -73,7 +73,7 @@ export default function BlogPage() {
           transition={{ duration: 10 }}
           className="absolute inset-0 z-0"
         >
-          <Image src="/GULF%20LEGAL%20CONSULTANT.jpeg" alt="Background" fill className="opacity-10 object-cover mix-blend-overlay" />
+          <Image src="https://picsum.photos/1920/600?random=5" alt="Background" fill className="opacity-10 object-cover mix-blend-overlay" />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-primary z-10"></div>
         
