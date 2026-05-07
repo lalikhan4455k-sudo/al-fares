@@ -56,93 +56,30 @@ export default function ContactPage() {
             
             {/* Contact Info */}
             <div>
-              <h3 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Our Offices</h3>
+              <h3 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Contact Information</h3>
               <h4 className="text-3xl md:text-4xl font-bold mb-10 leading-tight tracking-tight">
-                We Are Here To <span className="text-secondary">Help You</span>
+                Get In <span className="text-secondary">Touch</span>
               </h4>
               
               <div className="space-y-8 mb-12">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-2">Saudi Arabia Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Jawazat office, in front passport office metro station</p>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">District Moharaba, King Fahd Road</p>
-                    <p className="text-primary/70 mb-2 text-sm font-normal">Riyadh 12211, Saudi Arabia</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Jawazat+office+King+Fahd+Road+Riyadh" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-2">Dubai Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Gulf legal consultant, office no 10-A, 7th floor</p>
-                    <p className="text-primary/70 mb-2 text-sm font-normal">Al Ameri Tower, Barsha Heights, Dubai, UAE</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Al+Ameri+Tower+Barsha+Heights+Dubai" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-2">Pakistan Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Chamber no:376A, Sir syed block</p>
-                    <p className="text-primary/70 mb-2 text-sm font-normal">Old district court, F/8, Islamabad, Pakistan</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Old+District+Court+F/8+Islamabad" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-2">Philippine Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Gulf legal consultant, office no:5, 5th Floor</p>
-                    <p className="text-primary/70 mb-2 text-sm font-normal">Oracle plaza, 9th Avenue, Global City, Taguig, Philippines</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Oracle+Plaza+9th+Avenue+Taguig" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-2">India Office</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">12th Floor, Business Park, MG Road</p>
-                    <p className="text-primary/70 mb-2 text-sm font-normal">Bangalore, Karnataka 560001, India</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=MG+Road+Bangalore+India" target="_blank" rel="noopener noreferrer" className="text-secondary text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors">Get Directions</a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-secondary" />
                   </div>
                   <div>
-                    <h5 className="font-bold text-lg mb-2">Phone & Email</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">+966 59 251 5012</p>
-                    <p className="text-primary/70 text-sm font-normal">info@gulflegalconsultant.com</p>
+                    <h5 className="font-bold text-lg mb-2">Phone</h5>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">+966597454697</p>
+                    <p className="text-primary/70 text-sm font-normal">+923485285571</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-secondary" />
+                    <Mail className="w-5 h-5 text-secondary" />
                   </div>
                   <div>
-                    <h5 className="font-bold text-lg mb-2">Office Hours</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Sunday - Thursday: 09:00 AM - 06:00 PM</p>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">Saturday: 10:00 AM - 02:00 PM</p>
-                    <p className="text-primary/70 text-sm font-normal">Friday: Closed</p>
+                    <h5 className="font-bold text-lg mb-2">Email</h5>
+                    <p className="text-primary/70 text-sm font-normal">gulflegalconsultat26@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -168,7 +105,7 @@ export default function ContactPage() {
                   For urgent inquiries, you can reach our legal team directly via WhatsApp. We typically respond within 1 hour during business hours.
                 </p>
                 <a 
-                  href="https://wa.me/966592515012" 
+                  href="https://wa.me/966597454697" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors w-full sm:w-auto"
@@ -254,14 +191,17 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="h-[400px] w-full bg-gray-200 relative">
-        {/* Placeholder for Google Maps */}
-        <div className="absolute inset-0 flex items-center justify-center bg-primary/5">
-          <div className="text-center">
-            <MapPin className="w-12 h-12 text-secondary mx-auto mb-4 opacity-50" />
-            <p className="text-primary/60 font-medium uppercase tracking-widest text-sm">Interactive Map Integration</p>
-          </div>
-        </div>
+      <section className="h-[400px] w-full relative">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3625.980870559512!2d46.70165247536452!3d24.658786778061533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03f7d5d5d5d5%3A0x5d5d5d5d5d5d5d5!2sMP53%2BGM9%20Al%20Murabba%2C%20Riyadh%20Saudi%20Arabia!5e0!3m2!1sen!2sus!4v1778188004141!5m2!1sen!2sus" 
+          width="100%" 
+          height="400" 
+          style={{ border: 0 }} 
+          allowFullScreen 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+          className="absolute inset-0"
+        />
       </section>
     </div>
   );

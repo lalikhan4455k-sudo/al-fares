@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Phone, Mail, Facebook, Twitter, Instagram } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 import { useState } from 'react';
 
@@ -58,18 +58,22 @@ export default function Footer() {
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-secondary" />
-                <span>+966 59 251 5012</span>
+                <span>+966597454697</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm">
+                <Phone className="w-4 h-4 text-secondary" />
+                <span>+923485285571</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-secondary" />
-                <span>info@gulflegalconsultant.com</span>
+                <span>gulflegalconsultat26@gmail.com</span>
               </div>
             </div>
             <div className="flex space-x-4 pt-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Linkedin className="w-5 h-5" /></a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Instagram className="w-5 h-5" /></a>
+              <a href="https://www.facebook.com/share/1CgN1xE2Tz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="https://x.com/gulflegalconslt?s=21" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="https://www.instagram.com/gulflegalconsultant?igsh=YTMxZGQ4ODNmOW53" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Instagram className="w-5 h-5" /></a>
+              <a href="https://www.tiktok.com/@gulf.legal.consul?_r=1&_t=ZS-96ADmdjdKQy" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
             </div>
           </div>
 
