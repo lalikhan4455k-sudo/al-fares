@@ -8,7 +8,7 @@ export default function PrivacyPage() {
     <div className="bg-light text-primary min-h-screen">
       <section className="bg-primary py-32 relative overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary z-10"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1920&auto=format&fit=crop')] opacity-20 object-cover mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('/GULF%20LEGAL%20CONSULTANT.jpeg')] opacity-20 object-cover mix-blend-overlay"></div>
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
           <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight">Privacy Policy</h1>

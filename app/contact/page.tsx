@@ -42,7 +42,7 @@ export default function ContactPage() {
     <div className="bg-light text-primary min-h-screen">
       {/* Header */}
       <section className="bg-primary py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://picsum.photos/1920/600?random=7')] opacity-10 object-cover mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('/GULF%20LEGAL%20CONSULTANT.jpeg')] opacity-10 object-cover mix-blend-overlay"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-4">Get In Touch</h1>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">Contact Us</h2>

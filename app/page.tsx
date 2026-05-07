@@ -44,7 +44,7 @@ export default function Home() {
           className="absolute inset-0 z-0"
         >
           <Image
-            src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=1920&auto=format&fit=crop"
+            src="/GULF%20LEGAL%20CONSULTANT.jpeg"
             alt="Law Office"
             fill
             className="object-cover opacity-30 mix-blend-luminosity"
@@ -216,7 +216,7 @@ export default function Home() {
                 className="relative z-10 aspect-[5/6] rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)]"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop"
+                  src="/GULF%20LEGAL%20CONSULTANT.jpeg"
                   alt="Dedicated Lawyer - Legal Consultant"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
@@ -649,7 +649,7 @@ export default function Home() {
           className="absolute inset-0"
         >
           <Image 
-            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1920&auto=format&fit=crop" 
+            src="/GULF%20LEGAL%20CONSULTANT.jpeg" 
             alt="CTA Background" 
             fill 
             className="opacity-10 mix-blend-multiply object-cover" 
