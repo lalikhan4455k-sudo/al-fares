@@ -216,10 +216,10 @@ export default function Home() {
                 className="relative z-10 aspect-[5/6] rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)]"
               >
                 <Image
-                  src="/GULF%20LEGAL%20CONSULTANT.jpeg"
+                  src="/GULF%20LEGAL%20CONSULTANT%20LAWYER.jpeg"
                   alt="Dedicated Lawyer - Legal Consultant"
                   fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                  className="object-cover transition-all duration-1000"
                   referrerPolicy="no-referrer"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />

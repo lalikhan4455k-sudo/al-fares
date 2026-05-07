@@ -39,7 +39,7 @@ export default function AboutPage() {
                   src="/GULF%20LEGAL%20CONSULTANT.jpeg"
                   alt="Dedicated Lawyer - Legal Consultant"
                   fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  className="object-cover transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
               </div>
