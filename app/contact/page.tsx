@@ -68,7 +68,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h5 className="font-bold text-lg mb-2">Phone</h5>
-                    <p className="text-primary/70 mb-1 text-sm font-normal">+966597454697</p>
+                    <p className="text-primary/70 mb-1 text-sm font-normal">0581676798</p>
                     <p className="text-primary/70 text-sm font-normal">+923485285571</p>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
                   For urgent inquiries, you can reach our legal team directly via WhatsApp. We typically respond within 1 hour during business hours.
                 </p>
                 <a 
-                  href="https://wa.me/966597454697" 
+                  href="https://wa.me/966581676798" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors w-full sm:w-auto"

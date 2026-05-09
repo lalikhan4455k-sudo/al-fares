@@ -87,9 +87,9 @@ export default function AboutPage() {
                   <Award className="w-10 h-10 text-secondary mb-4" />
                   <h5 className="font-bold uppercase tracking-wider mb-2">Certifications</h5>
                   <ul className="space-y-2 text-primary/70 text-sm">
-                    <li>• Licensed Lawyer - Saudi Ministry of Justice</li>
-                    <li>• Registered Legal Consultant - Dubai Legal Affairs</li>
-                    <li>• Certified Arbitrator</li>
+                    <li>• Licensed Lawyer — Practicing across multiple jurisdictions</li>
+                    <li>• Specialization in the Saudi legal system</li>
+                    <li>• Certified Arbitrator (Certification Updated)</li>
                   </ul>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function AboutPage() {
               <h3 className="text-sm font-bold text-secondary uppercase tracking-widest mb-6">Professional Timeline</h3>
               <div className="space-y-8">
                 {[
-                  { year: '2010 - Present', title: 'Managing Partner', company: 'Gulf Legal Consultant', desc: 'Leading strategic legal advisory for high-net-worth individuals and multinational corporations in KSA and UAE.' },
+                  { year: '2013 - Present', title: 'Managing Partner', company: 'Gulf Legal Consultant', desc: 'Leading strategic legal advisory for high-net-worth individuals and multinational corporations across multiple jurisdictions.' },
                   { year: '2005 - 2010', title: 'Senior Legal Consultant', company: 'International Legal Group', desc: 'Specialized in cross-border commercial litigation and corporate restructuring across the GCC.' },
                   { year: '2000 - 2005', title: 'Legal Associate', company: 'Regional Advocacy Chambers', desc: 'Focused on Sharia-compliant family law and civil litigation in Saudi Arabia.' }
                 ].map((item, i) => (

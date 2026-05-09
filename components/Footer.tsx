@@ -3,7 +3,15 @@
 import Link from 'next/link';
 import { Phone, Mail, Facebook, Twitter, Instagram } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
-import { useState } from 'react';
+import { useState, type SVGProps } from 'react';
+
+function TikTokIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M16.6 3c.4 3 2.1 4.9 5 5v3.3c-1.9.1-3.5-.5-5-1.5v6.1c0 4-3.3 7.1-7.3 6.6-2.7-.4-5-2.6-5.3-5.4C3.5 13 7 9.6 11.2 10v3.6c-.3-.1-.7-.1-1 0-1.1.2-1.9 1.3-1.7 2.5.1.9.9 1.6 1.8 1.8 1.3.2 2.4-.8 2.4-2.1V3h3.9Z" />
+    </svg>
+  );
+}
 
 export default function Footer() {
   const { t } = useI18n();
@@ -58,7 +66,7 @@ export default function Footer() {
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-secondary" />
-                <span>+966597454697</span>
+                <span>0581676798</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-secondary" />
@@ -73,7 +81,7 @@ export default function Footer() {
               <a href="https://www.facebook.com/share/1CgN1xE2Tz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
               <a href="https://x.com/gulflegalconslt?s=21" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
               <a href="https://www.instagram.com/gulflegalconsultant?igsh=YTMxZGQ4ODNmOW53" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="https://www.tiktok.com/@gulf.legal.consul?_r=1&_t=ZS-96ADmdjdKQy" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="https://www.tiktok.com/@gulf.legal.consul?_r=1&_t=ZS-96ADmdjdKQy" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><TikTokIcon className="w-5 h-5" /></a>
             </div>
           </div>
 

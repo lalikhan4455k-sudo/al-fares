@@ -232,7 +232,7 @@ export default function Home() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -bottom-6 -right-6 bg-secondary text-primary p-8 rounded-xl shadow-xl z-20 border border-white/20 backdrop-blur-md"
               >
-                <p className="text-5xl font-bold mb-1">15+</p>
+                <p className="text-5xl font-bold mb-1">13+</p>
                 <p className="text-[10px] uppercase tracking-[0.2em] font-bold opacity-70">{t('about.years')}</p>
               </motion.div>
               
@@ -258,10 +258,10 @@ export default function Home() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                   {[
-                    'Licensed Lawyer',
-                    'Corporate Specialist',
-                    'Strategic Guidance',
-                    'Bilingual Advisory'
+                    'Licensed Lawyer — Multiple Jurisdictions',
+                    'Specialist in Saudi Legal System',
+                    'Certified Arbitrator (Certification Updated)',
+                    'Strategic Cross-Border Advisory'
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3 group">
                       <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-primary transition-all duration-300">
@@ -297,7 +297,7 @@ export default function Home() {
               { label: 'Cases Resolved', value: '1,200+', icon: Scale },
               { label: 'Corporate Clients', value: '450+', icon: Building },
               { label: 'Success Rate', value: '98%', icon: ShieldCheck },
-              { label: 'Years Experience', value: '15+', icon: Award },
+              { label: 'Years Experience', value: '13+', icon: Award },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -414,13 +414,13 @@ export default function Home() {
             >
               <div>
                 <Clock className="w-10 h-10 text-secondary mb-6 group-hover:rotate-12 transition-transform duration-500" strokeWidth={1.5} />
-                <h4 className="text-xl font-bold mb-3">15+ Years Experience</h4>
+                <h4 className="text-xl font-bold mb-3">13+ Years Experience</h4>
                 <p className="text-primary/60 leading-relaxed font-normal text-sm">
                   A proven track record of successful strategic legal guidance and advisory services across multiple jurisdictions.
                 </p>
               </div>
               <div className="mt-6 pt-6 border-t border-primary/10 flex items-center justify-between">
-                <span className="text-3xl font-bold text-secondary">15+</span>
+                <span className="text-3xl font-bold text-secondary">13+</span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-primary/40">Years of Excellence</span>
               </div>
             </motion.div>
@@ -433,7 +433,7 @@ export default function Home() {
               <Globe className="w-8 h-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-500" strokeWidth={1.5} />
               <h4 className="text-lg font-bold mb-2">Cross-Border Advisory</h4>
               <p className="text-primary/60 text-xs leading-relaxed font-normal">
-                Seamless cross-border legal consultancy across Saudi Arabia, UAE, and GCC jurisdictions.
+                Seamless cross-border legal consultancy across multiple jurisdictions.
               </p>
             </motion.div>
 
@@ -633,7 +633,7 @@ export default function Home() {
               </h3>
               <div className="w-12 h-px bg-secondary mb-6 group-hover:w-20 transition-all duration-500"></div>
               <p className="text-primary/70 leading-relaxed text-lg font-normal">
-                Fully licensed legal consultant authorized to provide legal advisory services in the Kingdom of Saudi Arabia and the United Arab Emirates. All services are delivered in compliance with local legal and professional regulatory authorities.
+                Fully licensed legal consultant to provide legal assistance across multiple jurisdictions. All services are delivered in compliance with local legal and professional regulatory authorities.
               </p>
             </motion.div>
 
