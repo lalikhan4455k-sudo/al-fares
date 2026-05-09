@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { I18nProvider } from '@/lib/i18n/context';
 import Script from 'next/script';
 import { Inter } from 'next/font/google';
@@ -28,6 +29,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           <main className="flex-grow pt-20">
             {children}
           </main>
+          <WhatsAppFloat />
           <Footer />
         </I18nProvider>
       </body>

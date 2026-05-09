@@ -5,6 +5,8 @@ import { Phone, Mail, Facebook, Twitter, Instagram } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 import { useState, type SVGProps } from 'react';
 
+const WHATSAPP_HREF = 'https://wa.me/966581676798';
+
 function TikTokIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
@@ -66,11 +68,15 @@ export default function Footer() {
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-secondary" />
-                <span>0581676798</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Phone className="w-4 h-4 text-secondary" />
-                <span>+923485285571</span>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-secondary transition-colors"
+                  aria-label="Chat on WhatsApp: 0581676798"
+                >
+                  0581676798
+                </a>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-secondary" />
