@@ -6,6 +6,8 @@ import { useI18n } from '@/lib/i18n/context';
 import { useState, type SVGProps } from 'react';
 
 const WHATSAPP_HREF = 'https://wa.me/966581676798';
+const PHONE_HREF_2 = 'tel:+966597454697';
+const PHONE_HREF_3 = 'tel:+923485285571';
 
 function TikTokIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -68,15 +70,31 @@ export default function Footer() {
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-secondary" />
-                <a
-                  href={WHATSAPP_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-secondary transition-colors"
-                  aria-label="Chat on WhatsApp: 0581676798"
-                >
-                  0581676798
-                </a>
+                <div className="flex flex-col">
+                  <a
+                    href={WHATSAPP_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-secondary transition-colors"
+                    aria-label="WhatsApp: +966581676798"
+                  >
+                    +966581676798
+                  </a>
+                  <a
+                    href={PHONE_HREF_2}
+                    className="hover:text-secondary transition-colors"
+                    aria-label="Phone: +966597454697"
+                  >
+                    +966597454697
+                  </a>
+                  <a
+                    href={PHONE_HREF_3}
+                    className="hover:text-secondary transition-colors"
+                    aria-label="Phone: +923485285571"
+                  >
+                    +923485285571
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-secondary" />

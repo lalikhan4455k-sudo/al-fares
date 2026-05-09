@@ -7,6 +7,11 @@ import Link from 'next/link';
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const whatsappHref = 'https://wa.me/966581676798';
+  const phoneContacts = [
+    { label: 'WhatsApp', href: whatsappHref, display: '+966581676798' },
+    { label: 'Phone', href: 'tel:+966597454697', display: '+966597454697' },
+    { label: 'Phone', href: 'tel:+923485285571', display: '+923485285571' },
+  ];
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -69,14 +74,23 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h5 className="font-bold text-lg mb-2">Phone</h5>
-                    <a
-                      href={whatsappHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary/70 mb-1 text-sm font-normal inline-block hover:text-secondary transition-colors"
-                    >
-                      0581676798
-                    </a>
+                    <div className="flex flex-col gap-1">
+                      {phoneContacts.map((contact) => (
+                        <a
+                          key={contact.href}
+                          href={contact.href}
+                          target={contact.label === 'WhatsApp' ? '_blank' : undefined}
+                          rel={contact.label === 'WhatsApp' ? 'noopener noreferrer' : undefined}
+                          className="text-primary/70 text-sm font-normal inline-flex items-center gap-2 hover:text-secondary transition-colors"
+                          aria-label={`${contact.label}: ${contact.display}`}
+                        >
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-primary/50">
+                            {contact.label}
+                          </span>
+                          <span>{contact.display}</span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
