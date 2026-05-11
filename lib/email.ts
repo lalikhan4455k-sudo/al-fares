@@ -1,5 +1,15 @@
 import nodemailer from 'nodemailer';
 
+const BRAND_NAME = 'Gulf Legal Consultation';
+
+let verifyPromise: Promise<boolean> | null = null;
+
+function requireEnv(name: string) {
+  const value = process.env[name];
+  if (!value) throw new Error(`Missing environment variable: ${name}`);
+  return value;
+}
+
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: parseInt(process.env.EMAIL_PORT || '587'),
@@ -8,7 +18,30 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    minVersion: 'TLSv1.2',
+  },
 });
+
+async function ensureTransporterReady() {
+  // Validate required envs early so failures are obvious in logs/API responses.
+  requireEnv('EMAIL_HOST');
+  requireEnv('EMAIL_PORT');
+  requireEnv('EMAIL_USER');
+  requireEnv('EMAIL_PASS');
+
+  if (!verifyPromise) {
+    verifyPromise = transporter
+      .verify()
+      .then(() => true)
+      .catch((err) => {
+        verifyPromise = null;
+        throw err;
+      });
+  }
+
+  return verifyPromise;
+}
 
 const EMAIL_STYLE = `
   <style>
@@ -34,6 +67,7 @@ const EMAIL_STYLE = `
 `;
 
 export async function sendBookingConfirmation(booking: any) {
+  await ensureTransporterReady();
   const name = booking.name || 'Valued Client';
   const email = booking.email || '';
   const service = booking.service || 'Legal Consultation';
@@ -54,9 +88,9 @@ export async function sendBookingConfirmation(booking: any) {
   if (email) {
     emailPromises.push(
       transporter.sendMail({
-        from: `"Gulf Legal Consultant" <${fromEmail}>`,
+        from: `"${BRAND_NAME}" <${fromEmail}>`,
         to: email,
-        subject: 'Consultation Confirmed - Gulf Legal Consultant',
+        subject: `Consultation Confirmed - ${BRAND_NAME}`,
         html: `
           <!DOCTYPE html>
           <html>
@@ -67,7 +101,7 @@ export async function sendBookingConfirmation(booking: any) {
           <div class="wrapper">
           <div class="container">
             <div class="header">
-              <h1>Gulf Legal Consultant</h1>
+              <h1>${BRAND_NAME}</h1>
               <p>Excellence in Legal Counsel</p>
             </div>
             <div class="content">
@@ -84,10 +118,10 @@ export async function sendBookingConfirmation(booking: any) {
                 </ul>
               </div>
               <p>If you need to reschedule or have any immediate questions, please contact our office directly.</p>
-              <p>Thank you for choosing Gulf Legal Consultant.</p>
+              <p>Thank you for choosing ${BRAND_NAME}.</p>
             </div>
             <div class="footer">
-              <p>&copy; ${new Date().getFullYear()} Gulf Legal Consultant. All rights reserved.</p>
+              <p>&copy; ${new Date().getFullYear()} ${BRAND_NAME}. All rights reserved.</p>
               <p>Riyadh | Dubai | Abu Dhabi | Doha | Kuwait | Muscat</p>
             </div>
           </div>
@@ -106,7 +140,7 @@ export async function sendBookingConfirmation(booking: any) {
   if (process.env.OWNER_EMAIL) {
     emailPromises.push(
       transporter.sendMail({
-        from: `"System | Gulf Legal Consultant" <${fromEmail}>`,
+        from: `"System | ${BRAND_NAME}" <${fromEmail}>`,
         to: process.env.OWNER_EMAIL,
         subject: `NEW BOOKING: ${name} - ${service}`,
         html: `
@@ -159,15 +193,156 @@ export async function sendBookingConfirmation(booking: any) {
   }
 }
 
+export async function sendAdminBookingRequest(booking: any) {
+  await ensureTransporterReady();
+  const fromEmail = process.env.EMAIL_USER;
+  const ownerEmail = process.env.OWNER_EMAIL;
+
+  if (!fromEmail || !ownerEmail) {
+    console.error('EMAIL_USER or OWNER_EMAIL is not defined. Cannot notify admin.');
+    return false;
+  }
+
+  const name = booking.name || 'Valued Client';
+  const email = booking.email || '';
+  const service = booking.service || 'Legal Consultation';
+  const date = booking.date || 'N/A';
+  const time = booking.time || 'N/A';
+  const type = booking.type || 'online';
+
+  try {
+    await transporter.sendMail({
+      from: `"System | ${BRAND_NAME}" <${fromEmail}>`,
+      to: ownerEmail,
+      subject: `NEW CONSULTATION (Pending Approval): ${name} - ${service}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        ${EMAIL_STYLE}
+        </head>
+        <body>
+        <div class="wrapper">
+        <div class="container">
+          <div class="header">
+            <h1>New Consultation Request</h1>
+            <p>Pending Payment Screenshot (WhatsApp)</p>
+          </div>
+          <div class="content">
+            <h2>Client Details</h2>
+            <div class="details">
+              <ul>
+                <li><strong>Booking ID:</strong> #${booking.id ?? 'N/A'}</li>
+                <li><strong>Client Name:</strong> ${name}</li>
+                <li><strong>Email:</strong> ${email}</li>
+                <li><strong>Phone:</strong> ${booking.phone || 'N/A'}</li>
+                <li><strong>Service:</strong> ${service}</li>
+                <li><strong>Date:</strong> ${date}</li>
+                <li><strong>Time:</strong> ${time}</li>
+                <li><strong>Type:</strong> ${type}</li>
+                <li><strong>Amount:</strong> 100 SAR (Bank Transfer)</li>
+                <li><strong>WhatsApp:</strong> +966581676798</li>
+              </ul>
+            </div>
+            <p><strong>Client Notes:</strong></p>
+            <div class="message-box">${booking.notes || 'No notes provided'}</div>
+            <p style="margin-top: 20px; font-size: 13px; color: #555;">
+              After receiving the payment screenshot on WhatsApp, approve this consultation from the Admin Panel.
+            </p>
+          </div>
+          <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} ${BRAND_NAME}. All rights reserved.</p>
+          </div>
+        </div>
+        </div>
+        </body>
+        </html>
+      `,
+    });
+    return true;
+  } catch (err) {
+    console.error('Error sending admin booking request email:', err);
+    return false;
+  }
+}
+
+export async function sendBookingApprovedConfirmation(booking: any) {
+  await ensureTransporterReady();
+  const fromEmail = process.env.EMAIL_USER;
+  if (!fromEmail) {
+    console.error('EMAIL_USER is not defined. Cannot send emails.');
+    return false;
+  }
+
+  const name = booking.name || 'Valued Client';
+  const email = booking.email || '';
+  if (!email) return false;
+
+  const service = booking.service || 'Legal Consultation';
+  const date = booking.date || 'To be scheduled';
+  const time = booking.time || 'To be scheduled';
+  const type = booking.type || 'online';
+
+  try {
+    await transporter.sendMail({
+      from: `"${BRAND_NAME}" <${fromEmail}>`,
+      to: email,
+      subject: `Consultation Approved - ${BRAND_NAME}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        ${EMAIL_STYLE}
+        </head>
+        <body>
+        <div class="wrapper">
+        <div class="container">
+          <div class="header">
+            <h1>${BRAND_NAME}</h1>
+            <p>Excellence in Legal Counsel</p>
+          </div>
+          <div class="content">
+            <h2>Consultation Approved</h2>
+            <p>Dear <strong>${name}</strong>,</p>
+            <p>Your consultation request has been approved. We have received your payment screenshot and your appointment is confirmed.</p>
+            <div class="details">
+              <ul>
+                <li><strong>Service:</strong> ${service}</li>
+                <li><strong>Date:</strong> ${date}</li>
+                <li><strong>Time:</strong> ${time}</li>
+                <li><strong>Type:</strong> ${type}</li>
+                <li><strong>Status:</strong> <span style="color: #10b981; font-weight: bold;">Approved (100.00 SAR)</span></li>
+              </ul>
+            </div>
+            <p>If you need to reschedule or have any questions, please contact us on WhatsApp: <strong>+966581676798</strong>.</p>
+            <p>Thank you for choosing ${BRAND_NAME}.</p>
+          </div>
+          <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} ${BRAND_NAME}. All rights reserved.</p>
+          </div>
+        </div>
+        </div>
+        </body>
+        </html>
+      `,
+    });
+    return true;
+  } catch (err) {
+    console.error('Error sending approved confirmation email:', err);
+    return false;
+  }
+}
+
 
 export async function sendBlogUpdate(subscribers: string[], blog: any) {
+  await ensureTransporterReady();
   const { title, excerpt, id } = blog;
   const blogUrl = `${process.env.APP_URL}/blog/${id}`;
 
   for (const email of subscribers) {
     try {
       await transporter.sendMail({
-        from: `"Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
+        from: `"${BRAND_NAME}" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: `Legal Insight: ${title}`,
         html: `
@@ -181,14 +356,14 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
           <div class="container">
             <div class="header">
               <h1>Legal Insights</h1>
-              <p>Gulf Legal Consultant</p>
+              <p>${BRAND_NAME}</p>
             </div>
             <div class="content">
               <h2>${title}</h2>
               <p>${excerpt}</p>
               <a href="${blogUrl}" class="button">Read Full Article</a>
               <hr style="margin-top: 30px; border: 0; border-top: 1px solid #eee;" />
-              <p style="font-size: 11px; color: #999;">You are receiving this because you subscribed to Gulf Legal Consultant updates.</p>
+              <p style="font-size: 11px; color: #999;">You are receiving this because you subscribed to ${BRAND_NAME} updates.</p>
             </div>
           </div>
           </div>
@@ -203,6 +378,7 @@ export async function sendBlogUpdate(subscribers: string[], blog: any) {
 }
 
 export async function sendNewSubscriberNotification(email: string) {
+  await ensureTransporterReady();
   // Notify Owner
   await transporter.sendMail({
     from: `"System" <${process.env.EMAIL_USER}>`,
@@ -221,7 +397,7 @@ export async function sendNewSubscriberNotification(email: string) {
           <h1>New Newsletter Subscriber</h1>
         </div>
         <div class="content">
-          <p>A new user has subscribed to the Gulf Legal Consultant newsletter.</p>
+          <p>A new user has subscribed to the ${BRAND_NAME} newsletter.</p>
           <div class="details">
             <p><strong>Email Address:</strong> ${email}</p>
           </div>
@@ -235,9 +411,9 @@ export async function sendNewSubscriberNotification(email: string) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
+    from: `"${BRAND_NAME}" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: 'Welcome to Gulf Legal Consultant Newsletter',
+    subject: `Welcome to ${BRAND_NAME} Newsletter`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -252,7 +428,7 @@ export async function sendNewSubscriberNotification(email: string) {
         </div>
         <div class="content">
           <h2>Thank you for subscribing!</h2>
-          <p>You have successfully joined the Gulf Legal Consultant newsletter. You will now receive our latest legal insights and firm updates directly in your inbox.</p>
+          <p>You have successfully joined the ${BRAND_NAME} newsletter. You will now receive our latest legal insights and firm updates directly in your inbox.</p>
           <p>We look forward to sharing our expertise with you.</p>
         </div>
       </div>
@@ -264,6 +440,7 @@ export async function sendNewSubscriberNotification(email: string) {
 }
 
 export async function sendContactFormNotification(data: any) {
+  await ensureTransporterReady();
   const { name, email, subject, message, phone } = data;
   
   // Notify Owner
@@ -305,9 +482,9 @@ export async function sendContactFormNotification(data: any) {
 
   // Acknowledge Client
   await transporter.sendMail({
-    from: `"Gulf Legal Consultant" <${process.env.EMAIL_USER}>`,
+    from: `"${BRAND_NAME}" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: 'We Received Your Message - Gulf Legal Consultant',
+    subject: `We Received Your Message - ${BRAND_NAME}`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -322,7 +499,7 @@ export async function sendContactFormNotification(data: any) {
         </div>
         <div class="content">
           <h2>Dear ${name},</h2>
-          <p>Thank you for reaching out to Gulf Legal Consultant. We have received your message regarding "<strong>${subject}</strong>" and our team will review it promptly.</p>
+          <p>Thank you for reaching out to ${BRAND_NAME}. We have received your message regarding "<strong>${subject}</strong>" and our team will review it promptly.</p>
           <p>One of our legal consultants will get back to you within 24-48 business hours.</p>
           <div class="details">
             <p><strong>Your Message:</strong></p>

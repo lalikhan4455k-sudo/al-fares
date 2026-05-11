@@ -66,6 +66,9 @@ export default function AboutPage() {
                 <p className="mb-6 text-lg leading-relaxed font-normal">
                   Since 2013 GLC is known for practical, business-focused legal solutions, including drafting legal notices, contract review, and regulatory compliance advisory. GLC maintains strategic joint ventures with licensed law firm, in every jurisdiction across Middle East and beyond, enabling broader legal coverage within the GCC.
                 </p>
+                <p className="mb-6 text-lg leading-relaxed font-normal">
+                  Joint Venture Partner: <strong>Zaim Communication Pvt Limited (UK)</strong> — Company No: <strong>17184987</strong>.
+                </p>
                 <p className="text-lg leading-relaxed font-normal">
                   GLC is committed to delivering efficient, technology-driven legal consultancy tailored to modern client needs. We believe in a client-first approach, ensuring that every legal strategy is tailored to the unique needs and goals of the individuals and businesses we represent.
                 </p>

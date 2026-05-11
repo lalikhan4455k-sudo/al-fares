@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Calendar as CalendarIcon, Clock, Video, MapPin, CreditCard, CheckCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Video, MapPin, CreditCard, CheckCircle, Landmark } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+const WHATSAPP_HREF = 'https://wa.me/966581676798';
 
 export default function BookingPage() {
   const { t } = useI18n();
@@ -22,12 +23,36 @@ export default function BookingPage() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const totalSteps = 5;
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+  };
+
+  const submitBookingRequest = async () => {
+    if (!formData.name || !formData.email || !formData.phone) {
+      alert('Please fill your name, email, and phone number.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingData: formData }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Failed to submit booking request');
+      setStep(5);
+    } catch (err: any) {
+      alert(err.message || 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -80,10 +105,10 @@ export default function BookingPage() {
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-primary/10 -z-10"></div>
             <div 
               className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-secondary -z-10 transition-all duration-500"
-              style={{ width: `${((step - 1) / 3) * 100}%` }}
+              style={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}
             ></div>
             
-            {[t('booking.step1'), t('booking.step2'), t('booking.step3'), t('booking.step4')].map((label, i) => (
+            {[t('booking.step1'), t('booking.step2'), t('booking.step3'), t('booking.step4'), t('booking.step5')].map((label, i) => (
               <div key={i} className="flex flex-col items-center gap-2 bg-light px-2">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${
                   step > i + 1 ? 'bg-secondary text-primary' : step === i + 1 ? 'bg-primary text-secondary border-2 border-secondary' : 'bg-primary/10 text-primary/40'
@@ -282,58 +307,79 @@ export default function BookingPage() {
                 </button>
                 
                 <div className="w-full max-w-[300px]">
-                  <PayPalScriptProvider options={{ 
-                    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "",
-                    currency: "USD",
-                    intent: "capture"
-                  }}>
-                    <PayPalButtons
-                      style={{ layout: "vertical", shape: "rect", label: "pay" }}
-                      disabled={!formData.name || !formData.email || !formData.phone}
-                      createOrder={async () => {
-                        try {
-                          const response = await fetch("/api/paypal/create-order", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ bookingData: formData }),
-                          });
-                          const order = await response.json();
-                          if (order.id) return order.id;
-                          throw new Error("Failed to create order");
-                        } catch (err) {
-                          console.error(err);
-                          alert("Could not initiate PayPal checkout.");
-                          return "";
-                        }
-                      }}
-                      onApprove={async (data) => {
-                        setIsSubmitting(true);
-                        try {
-                          const response = await fetch("/api/paypal/capture-order", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ orderId: data.orderID }),
-                          });
-                          const result = await response.json();
-                          if (result.success) {
-                            setStep(4);
-                          } else {
-                            throw new Error(result.error || "Payment capture failed");
-                          }
-                        } catch (err: any) {
-                          alert(err.message);
-                        } finally {
-                          setIsSubmitting(false);
-                        }
-                      }}
-                    />
-                  </PayPalScriptProvider>
+                  <button
+                    type="button"
+                    disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
+                    onClick={handleNext}
+                    className="w-full bg-secondary hover:bg-secondary-hover text-primary font-bold uppercase tracking-widest text-[10px] py-3 transition-colors disabled:opacity-50"
+                  >
+                    {t('booking.continue')}
+                  </button>
                 </div>
               </div>
             </div>
           )}
 
           {step === 4 && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+              <div>
+                <h3 className="text-xl font-serif font-bold mb-4">{t('booking.paymentStepTitle')}</h3>
+                <p className="text-primary/70 text-sm leading-relaxed">
+                  {t('booking.paymentStepDesc')}
+                </p>
+              </div>
+
+              <div className="bg-primary/5 p-6 rounded-sm border border-primary/10 flex items-start gap-3">
+                <Landmark className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-primary/80">
+                  <p className="font-bold text-primary mb-2">{t('booking.bankTitle')}</p>
+                  <p className="font-semibold text-primary">موسسه ركن ارتكاز للمقاولات</p>
+                  <p>حساب اهلي</p>
+                  <p><span className="text-primary/60">Account:</span> 22800000659509</p>
+                  <p><span className="text-primary/60">IBAN:</span> SA3710000022800000659509</p>
+                  <p><span className="text-primary/60">Bank:</span> Saudi National Bank</p>
+                </div>
+              </div>
+
+              <div className="bg-primary/5 p-6 rounded-sm border border-primary/10 flex items-start gap-3">
+                <CreditCard className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-primary/80 space-y-3">
+                  <p>{t('booking.whatsappDesc')}</p>
+                  <a
+                    href={WHATSAPP_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-secondary hover:bg-secondary-hover text-primary font-bold uppercase tracking-widest text-[10px] px-4 py-3 transition-colors"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-6 border-t border-primary/10">
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="text-primary/60 hover:text-primary font-bold uppercase tracking-wider transition-colors px-4 py-3"
+                >
+                  {t('booking.back')}
+                </button>
+
+                <div className="w-full max-w-[300px]">
+                  <button
+                    type="button"
+                    disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
+                    onClick={submitBookingRequest}
+                    className="w-full bg-secondary hover:bg-secondary-hover text-primary font-bold uppercase tracking-widest text-[10px] py-3 transition-colors disabled:opacity-50"
+                  >
+                    {isSubmitting ? '...' : t('booking.submitRequest')}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {step === 5 && (
             <div className="text-center py-12 animate-in zoom-in-95 duration-500">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-10 h-10 text-green-600" />

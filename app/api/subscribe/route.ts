@@ -17,11 +17,12 @@ export async function POST(req: Request) {
       db.prepare('INSERT INTO subscribers (email) VALUES (?)').run(email);
     }
 
-    // Notify owner
+    // Notify owner + acknowledge client (email)
     try {
       await sendNewSubscriberNotification(email);
     } catch (notifyError) {
       console.error('Failed to notify owner of new subscriber:', notifyError);
+      return NextResponse.json({ error: 'Email system error. Please try again later.' }, { status: 500 });
     }
 
     return NextResponse.json({ message: 'Subscribed successfully' });

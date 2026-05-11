@@ -29,11 +29,12 @@ export async function POST(req: Request) {
       console.error('Failed to save contact form submission to DB:', dbError);
     }
 
-    // Notify owner
+    // Notify owner + acknowledge client (email)
     try {
       await sendContactFormNotification({ name, email, subject, message, phone });
     } catch (notifyError) {
       console.error('Failed to notify owner of contact form submission:', notifyError);
+      return NextResponse.json({ error: 'Email system error. Please try again later.' }, { status: 500 });
     }
 
     return NextResponse.json({ message: 'Message sent successfully' });

@@ -41,7 +41,12 @@ if (isVercelPostgres) {
       notes TEXT,
       payment_status TEXT,
       paypal_order_id TEXT,
-      email_sent INTEGER DEFAULT 0
+      email_sent INTEGER DEFAULT 0,
+      status TEXT DEFAULT 'pending',
+      payment_method TEXT,
+      approved_at TEXT,
+      admin_notified INTEGER DEFAULT 0,
+      customer_email_sent INTEGER DEFAULT 0
     );
 
     CREATE TABLE IF NOT EXISTS subscribers (
@@ -59,6 +64,21 @@ if (isVercelPostgres) {
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
   `);
+
+  // Lightweight schema migration for existing SQLite databases
+  const existingColumns: { name: string }[] = db.prepare(`PRAGMA table_info(bookings)`).all();
+  const columnSet = new Set(existingColumns.map((c) => c.name));
+
+  const addColumnIfMissing = (name: string, ddl: string) => {
+    if (columnSet.has(name)) return;
+    db.exec(`ALTER TABLE bookings ADD COLUMN ${ddl};`);
+  };
+
+  addColumnIfMissing('status', `status TEXT DEFAULT 'pending'`);
+  addColumnIfMissing('payment_method', `payment_method TEXT`);
+  addColumnIfMissing('approved_at', `approved_at TEXT`);
+  addColumnIfMissing('admin_notified', `admin_notified INTEGER DEFAULT 0`);
+  addColumnIfMissing('customer_email_sent', `customer_email_sent INTEGER DEFAULT 0`);
 }
 
 export const isPostgres = isVercelPostgres;

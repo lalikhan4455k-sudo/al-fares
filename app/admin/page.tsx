@@ -11,6 +11,7 @@ export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [tab, setTab] = useState<'blogs' | 'bookings'>('blogs');
+  const [approvingId, setApprovingId] = useState<number | string | null>(null);
 
   const fetchBlogs = async () => {
     const res = await fetch('/api/blogs');
@@ -62,6 +63,22 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error('Delete error:', error);
       alert('Error deleting blog');
+    }
+  };
+
+  const approveBooking = async (id: number | string) => {
+    if (!confirm('Approve this consultation after receiving the payment screenshot on WhatsApp?')) return;
+
+    setApprovingId(id);
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}/approve`, { method: 'POST' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Failed to approve booking');
+      await fetchBookings();
+    } catch (error: any) {
+      alert(error.message || 'Error approving booking');
+    } finally {
+      setApprovingId(null);
     }
   };
 
@@ -259,7 +276,11 @@ export default function AdminDashboard() {
                         </div>
                         <div className="flex items-center gap-2 text-primary/70">
                           <CreditCard className="w-4 h-4 text-secondary" />
-                          <span className="uppercase font-bold text-[10px] px-2 py-0.5 bg-green-100 text-green-700 rounded-full">Paid</span>
+                          {booking.status === 'approved' || booking.payment_status === 'paid' ? (
+                            <span className="uppercase font-bold text-[10px] px-2 py-0.5 bg-green-100 text-green-700 rounded-full">Approved</span>
+                          ) : (
+                            <span className="uppercase font-bold text-[10px] px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full">Pending</span>
+                          )}
                         </div>
                       </div>
 
@@ -272,6 +293,15 @@ export default function AdminDashboard() {
                     <div className="lg:w-48 flex flex-col justify-between items-end">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-primary/30">ID: #{booking.id}</span>
                       <div className="flex gap-2">
+                        {booking.status !== 'approved' && booking.payment_status !== 'paid' ? (
+                          <button
+                            onClick={() => approveBooking(booking.id)}
+                            disabled={approvingId === booking.id}
+                            className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest bg-secondary text-primary hover:bg-secondary-hover transition-colors rounded-sm disabled:opacity-50"
+                          >
+                            {approvingId === booking.id ? '...' : 'Approve'}
+                          </button>
+                        ) : null}
                         <button className="p-2 text-primary/40 hover:text-primary transition-colors border border-primary/10 rounded-sm"><Edit className="w-4 h-4" /></button>
                         <button className="p-2 text-primary/40 hover:text-red-600 transition-colors border border-primary/10 rounded-sm"><Trash2 className="w-4 h-4" /></button>
                       </div>
@@ -286,4 +316,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-

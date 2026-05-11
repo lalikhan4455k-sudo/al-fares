@@ -67,6 +67,9 @@ export default function Footer() {
             <p className="text-sm leading-relaxed">
               {t('about.description')}
             </p>
+            <p className="text-xs text-light/70 leading-relaxed">
+              Joint Venture Partner: Zaim Communication Pvt Limited (UK) — Company No: 17184987
+            </p>
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-secondary" />
@@ -101,6 +104,7 @@ export default function Footer() {
                 <span>gulflegalconsultat26@gmail.com</span>
               </div>
             </div>
+
             <div className="flex space-x-4 pt-4">
               <a href="https://www.facebook.com/share/1CgN1xE2Tz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
               <a href="https://x.com/gulflegalconslt?s=21" target="_blank" rel="noopener noreferrer" className="text-light/60 hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
